@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AM for PM | A Nationwide Clean Air Initiative</title>
+
+  <!-- Favicon for browser tab (cloud icon PNG 32x32) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn-icons-png.flaticon.com/512/414/414825.png" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1e5aa8;
+      --secondary: #eaf2fb;
+      --accent: #029f53;
+      --dark: #0f2f5f;
+      --light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--secondary);
+      color: #1f1f1f;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f2f5f, #8d84ef);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    nav {
+      background-color: var(--light);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      padding: 1rem 1.75rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav button.active,
+    nav button:hover {
+      color: var(--primary);
+      border-bottom: 4px solid var(--accent);
+    }
+
+    section {
+      display: none;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      color: var(--dark);
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--light);
+      padding: 2.5rem;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .highlight {
+      background: #f5f8ff;
+      border-left: 6px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      margin: 0.75rem 0 1rem;
+    }
+
+    .buy-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    form {
+      background: var(--light);
+      padding: 3rem;
+      border-radius: 16px;
+      max-width: 600px;
+      margin: 2rem auto 0;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.3rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      background: var(--dark);
+      color: white;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AM for PM</h1>
+  <p>A nationwide non-profit initiative advancing education, research, and public action on particulate matter and air quality.</p>
+</header>
+
+<nav>
+  <button class="active" onclick="openTab('home', this)">
+    <i class="fa-solid fa-house"></i> Home
+  </button>
+  <button onclick="openTab('pm', this)">
+    <i class="fa-solid fa-wind"></i> Particulate Matter
+  </button>
+  <button onclick="openTab('pm25', this)">
+    <i class="fa-solid fa-lungs"></i> PM2.5
+  </button>
+  <button onclick="openTab('research', this)">
+    <i class="fa-solid fa-microscope"></i> Research
+  </button>
+  <button onclick="openTab('schools', this)">
+    <i class="fa-solid fa-school"></i> Education
+  </button>
+  <button onclick="openTab('resources', this)">
+    <i class="fa-solid fa-book-open"></i> Resources
+  </button>
+  <button onclick="openTab('shop', this)">
+    <i class="fa-solid fa-cart-shopping"></i> Shop
+  </button>
+</nav>
+
+<section id="home" class="active">
+  <h2>Our Mission</h2>
+  <p>AM for PM works to increase nationwide understanding of airborne particulate matter and its impacts on human health and the environment.</p>
+  <div class="highlight"><strong>Why it matters:</strong> Fine particles are among the most harmful air pollutants, yet remain widely misunderstood.</div>
+</section>
+
+<section id="pm">
+  <h2>Understanding Particulate Matter</h2>
+  <p>Particulate matter is a mixture of solid particles and liquid droplets suspended in the air.</p>
+  <div class="grid">
+    <div class="card"><h3>Sources</h3><p>Vehicles, power plants, construction, agriculture, and wildfires.</p></div>
+    <div class="card"><h3>Sizes</h3><p>Includes PM10, PM2.5, and ultrafine particles.</p></div>
+    <div class="card"><h3>Exposure</h3><p>Particles can be inhaled deep into the lungs and bloodstream.</p></div>
+  </div>
+</section>
+
+<section id="pm25">
+  <h2>PM2.5</h2>
+  <p>PM2.5 particles are smaller than 2.5 micrometers and pose serious health risks.</p>
+  <div class="grid">
+    <div class="card"><h3>Health Effects</h3><p>Linked to asthma, heart disease, and premature mortality.</p></div>
+    <div class="card"><h3>Monitoring</h3><p>Measured through monitoring stations and satellites.</p></div>
+    <div class="card"><h3>Environmental Justice</h3><p>Disproportionate exposure affects vulnerable communities.</p></div>
+  </div>
+</section>
+
+<section id="research">
+  <h2>Research & Data</h2>
+  <p>We translate peer-reviewed research into accessible educational content.</p>
+  <div class="grid">
+    <div class="card"><h3>Scientific Studies</h3><p>Summaries of current PM research.</p></div>
+    <div class="card"><h3>National Trends</h3><p>Air quality data and long-term trends.</p></div>
+    <div class="card"><h3>Policy Context</h3><p>Clear explanations of air quality standards.</p></div>
+  </div>
+</section>
+
+<section id="schools">
+  <h2>Education</h2>
+  <p>Curriculum-aligned materials for classrooms and educators.</p>
+  <div class="grid">
+    <div class="card"><h3>Lesson Plans</h3><p>Ready-to-use educational resources.</p></div>
+    <div class="card"><h3>Student Projects</h3><p>Community-based investigations.</p></div>
+    <div class="card"><h3>Teacher Support</h3><p>Professional development tools.</p></div>
+  </div>
+</section>
+
+<section id="resources">
+  <h2>Resources & Products</h2>
+  <p>All proceeds support clean air education nationwide.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>AM for PM T-Shirt</h3>
+      <p>Ethically sourced cotton t-shirt.</p>
+      <div class="price">$25</div>
+      <button class="buy-btn" onclick="openTab('shop', this)">Buy Now</button>
+    </div>
+    <div class="card">
+      <h3>Reusable Water Bottle</h3>
+      <p>BPA-free, durable water bottle.</p>
+      <div class="price">$18</div>
+      <button class="buy-btn" onclick="openTab('shop', this)">Buy Now</button>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <h2>Purchase & Registration</h2>
+  <p>Submit the form below. Order details will be emailed to the AM for PM team.</p>
+  <form id="orderForm">
+    <label>Full Name</label>
+    <input id="name" required />
+    <label>Email</label>
+    <input id="email" type="email" required />
+    <label>Product</label>
+    <select id="product">
+      <option>AM for PM T-Shirt — $25</option>
+      <option>Reusable Water Bottle — $18</option>
+    </select>
+    <label>Quantity</label>
+    <input id="quantity" type="number" min="1" value="1" />
+    <label>Shipping Address</label>
+    <input id="address" required />
+    <button class="buy-btn" type="submit" style="margin-top:1.5rem;">Submit Order</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 AM for PM | Advancing Clean Air Through Education
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  function openTab(tabId, btn) {
+    document.querySelectorAll('section').forEach((section) => section.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.querySelectorAll('nav button').forEach((button) => button.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
+
+  emailjs.init('hB1B_wlrMYhoq88P6');
+
+  document.getElementById('orderForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    emailjs
+      .send('service_imuassu', 'template_ossz99f', {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        product: document.getElementById('product').value,
+        quantity: document.getElementById('quantity').value,
+        address: document.getElementById('address').value,
+      })
+      .then(() => {
+        alert('Order submitted successfully!');
+        this.reset();
+      })
+      .catch(() => {
+        alert('Error submitting order. Please try again.');
+      });
+  });
+</script>
+
+</body>
+</html>

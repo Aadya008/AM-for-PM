@@ -212,10 +212,41 @@
   </button>
 </nav>
 
+<!-- HOME TAB -->
 <section id="home" class="active">
+  
+
+  <!-- Smaller image -->
+  <img
+    src="IMG_0656 copy.png"
+    alt="AM for PM clean air initiative"
+    style="
+      width:100%;
+      max-width:420px;
+      margin:2rem auto 0;
+      display:block;
+      border-radius:12px;
+    "
+  />
+
+  <!-- Editable text under image -->
+  <p style="text-align:center; margin-top:1rem; font-style:italic; color:#444;">
+    Aadya Mishra - Founder of "AM for PM" Initiative
+  </p>
+
   <h2>Our Mission</h2>
-  <p>AM for PM works to increase nationwide understanding of airborne particulate matter and its impacts on human health and the environment.</p>
-  <div class="highlight"><strong>Why it matters:</strong> Fine particles are among the most harmful air pollutants, yet remain widely misunderstood.</div>
+  <p>
+    AM for PM works to increase nationwide understanding of airborne particulate
+    matter and its impacts on human health and the environment.
+  </p>
+
+  <div class="highlight">
+    <strong>Why it matters:</strong>
+    Fine particles are among the most harmful air pollutants, yet remain widely
+    misunderstood.
+  </div>
+
+
 </section>
 
 <section id="pm">
@@ -305,9 +336,9 @@
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
   function openTab(tabId, btn) {
-    document.querySelectorAll('section').forEach((section) => section.classList.remove('active'));
+    document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-    document.querySelectorAll('nav button').forEach((button) => button.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(button => button.classList.remove('active'));
     if (btn) btn.classList.add('active');
   }
 
@@ -316,21 +347,18 @@
   document.getElementById('orderForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    emailjs
-      .send('service_imuassu', 'template_ossz99f', {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        product: document.getElementById('product').value,
-        quantity: document.getElementById('quantity').value,
-        address: document.getElementById('address').value,
-      })
-      .then(() => {
-        alert('Order submitted successfully!');
-        this.reset();
-      })
-      .catch(() => {
-        alert('Error submitting order. Please try again.');
-      });
+    emailjs.send('service_imuassu', 'template_ossz99f', {
+      name: name.value,
+      email: email.value,
+      product: product.value,
+      quantity: quantity.value,
+      address: address.value
+    }).then(() => {
+      alert('Order submitted successfully!');
+      this.reset();
+    }).catch(() => {
+      alert('Error submitting order. Please try again.');
+    });
   });
 </script>
 

@@ -15,7 +15,7 @@
     :root {
       --primary: #1e5aa8;
       --secondary: #eaf2fb;
-      --accent: #029f53;
+      --accent: #FFB300;
       --dark: #0f2f5f;
       --light: #ffffff;
     }
@@ -33,7 +33,7 @@
     }
 
     header {
-      background: linear-gradient(135deg, #0f2f5f, #8d84ef);
+      background: linear-gradient(135deg, #1B5E20, #4FC3F7);
       color: white;
       padding: 4rem 2rem;
       text-align: center;
@@ -172,10 +172,32 @@
       border: 1px solid #ccc;
     }
 
+    .image-banner {
+      width: 100%;
+      border-radius: 14px;
+      margin-top: 2rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+  .image-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  }
+
     footer {
       text-align: center;
       padding: 2.5rem;
-      background: var(--dark);
+      background: linear-gradient(135deg, #1B5E20, #4FC3F7);
       color: white;
       margin-top: 4rem;
     }
@@ -199,7 +221,7 @@
     <i class="fa-solid fa-lungs"></i> PM2.5
   </button>
   <button onclick="openTab('research', this)">
-    <i class="fa-solid fa-microscope"></i> Research
+    <i class="fa-solid fa-microscope"></i> Research and Current News
   </button>
   <button onclick="openTab('schools', this)">
     <i class="fa-solid fa-school"></i> Education
@@ -216,7 +238,30 @@
 <section id="home" class="active">
   
 
-  <!-- Smaller image -->
+
+  <h2>Our Mission</h2>
+  <p>
+    AM for PM works to increase nationwide understanding of airborne particulate
+    matter and its impacts on human health and the environment.
+  </p>
+
+  <div class="highlight">
+    <strong>Why it matters:</strong>
+    You might be wondering, what is so wrong with pollution? Answer: Basically everything. 
+    It can greatly impact different scales of society, from individual well-being to the downfall of a country's economy.
+    Some of the most harmful pollutants causing this issue are Carbon Dioxide, Nitrogen Dioxide, and especially, PM.
+    When specifically looking at fine particles like PM2.5, they are among the most harmful air pollutants, 
+    yet remain widely misunderstood.
+  </div>
+  <h2>About</h2>
+  <div class="highlight">
+    <strong>AM for PM</strong>
+    is a student-led environmental initiative dedicated to raising awareness about PM2.5 air pollution and 
+    its impact on human health. Our mission is to make environmental 
+    science accessible and meaningful for students and communities through research, education, workshops, and public outreach. 
+    We believe every person deserves access to clean air and the knowledge to protect their health and environment.
+
+  </div>
   <img
     src="IMG_0656 copy.png"
     alt="AM for PM clean air initiative"
@@ -229,45 +274,77 @@
     "
   />
 
-  <!-- Editable text under image -->
   <p style="text-align:center; margin-top:1rem; font-style:italic; color:#444;">
     Aadya Mishra - Founder of "AM for PM" Initiative
   </p>
 
-  <h2>Our Mission</h2>
-  <p>
-    AM for PM works to increase nationwide understanding of airborne particulate
-    matter and its impacts on human health and the environment.
-  </p>
-
-  <div class="highlight">
-    <strong>Why it matters:</strong>
-    Fine particles are among the most harmful air pollutants, yet remain widely
-    misunderstood.
-  </div>
-
-
 </section>
 
-<section id="pm">
-  <h2>Understanding Particulate Matter</h2>
-  <p>Particulate matter is a mixture of solid particles and liquid droplets suspended in the air.</p>
-  <div class="grid">
-    <div class="card"><h3>Sources</h3><p>Vehicles, power plants, construction, agriculture, and wildfires.</p></div>
-    <div class="card"><h3>Sizes</h3><p>Includes PM10, PM2.5, and ultrafine particles.</p></div>
-    <div class="card"><h3>Exposure</h3><p>Particles can be inhaled deep into the lungs and bloodstream.</p></div>
-  </div>
-</section>
+<section id="pm"> 
+  <h2>Understanding Particulate Matter</h2> 
+  <p> Particulate matter is a mixture of solid particles and liquid droplets suspended in the air. 
+    Made out of particles such as organic chemical compounds, soot, heavy metals, sulfates, nitrates, and acids, 
+    PM2.5 and other PMs can dangerously alter our well-being and future lifestyles. The sizes can range from PM1.0, 
+    PM2.5, and PM10. </p> 
+    <div class="image-grid"> 
+      <img src="https://plus.unsplash.com/premium_photo-1664298311043-46b3814a511f?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial air pollution" /> 
+      <img src="https://ww2.arb.ca.gov/sites/default/files/inline-images/human_hair_0.png" alt="Wildfire smoke in atmosphere" /> 
+      <img src="https://cdn.prod.website-files.com/5f23e100544c90c140f34325/67ae01a18dcc4cec81f0325e_628f9da4b487bb6b620efd28_Artboard%25201%25404x-100.jpeg" alt="Traffic pollution" /> 
+    </div> 
+      <div class="grid"> <div class="card"> 
+        <h3>Sources</h3> 
+        <p>Vehicles, power plants, construction, agriculture, and wildfires.</p> 
+      </div> <div class="card"> 
+        <h3>Sizes</h3> 
+        <p>Includes PM10, PM2.5, and ultrafine particles.</p> 
+      </div> 
+      <div class="card"> 
+        <h3>Exposure</h3> 
+        <p>Particles can be inhaled deep into the lungs and bloodstream.</p> 
+      </div> 
+    </div>
+    <div class="grid">
+      <div class="card"><h3>Image Source</h3><p>plus.unsplash.com</p>
+      </div>
+      <div class="card"><h3>Image Source</h3><p>ww2.arb.ca.gov</p>
+      </div>
+      <div class="card"><h3>Image Source</h3><p>https://atmotube.com/</p>
+      </div>
+    </div> 
+  </section>
 
-<section id="pm25">
-  <h2>PM2.5</h2>
-  <p>PM2.5 particles are smaller than 2.5 micrometers and pose serious health risks.</p>
-  <div class="grid">
-    <div class="card"><h3>Health Effects</h3><p>Linked to asthma, heart disease, and premature mortality.</p></div>
-    <div class="card"><h3>Monitoring</h3><p>Measured through monitoring stations and satellites.</p></div>
-    <div class="card"><h3>Environmental Justice</h3><p>Disproportionate exposure affects vulnerable communities.</p></div>
-  </div>
-</section>
+  <section id="pm25">
+    <h2>PM2.5</h2> 
+    <p>PM2.5 particles are smaller than 2.5 micrometers and pose serious health risks.</p>
+    <div class="image-grid">
+      <img
+        src="https://www.howardluksmd.com/wp-content/uploads/2021/11/AQi-PM-2.5-levels-health-effects.jpeg" alt="Person wearing mask in pollution"
+      />
+      <img
+        src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?q=80&w=800&auto=format&fit=crop" alt="Smog and PM2.5 pollution"
+      />
+      <img
+        src="https://www.alohaz.com/cdn/shop/files/pm-25-filter-activated-carbon-face-mask-alohaz-2500043.webp?v=1754708305&width=1646" alt="Air quality monitoring"
+      />
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Health Effects</h3><p>Linked to asthma, heart disease, and premature mortality.</p></div>
+      <div class="card">
+        <h3>Monitoring</h3><p>Measured through monitoring stations and satellites.</p></div>
+      <div class="card">
+        <h3>Sources of Removal</h3><p>PM2.5 can be removed through various filters available online. The best filters contain carbon filters or HEPA filters.</p></div>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>Image Source</h3><p>www.howardluksmd.com</p>
+      </div>
+      <div class="card"><h3>Image Source</h3><p>images.unsplash.com</p>
+      </div>
+      <div class="card"><h3>Image Source</h3><p>www.alohaz.com</p>
+      </div>
+    </div>
+  </section>
 
 <section id="research">
   <h2>Research & Data</h2>
@@ -281,12 +358,18 @@
 
 <section id="schools">
   <h2>Education</h2>
-  <p>Curriculum-aligned materials for classrooms and educators.</p>
+  <p>Curriculum-aligned materials for classrooms and educators as well as sessions to spread awareness and knowledge can be implemented
+    both in school and out of school.
+  </p>
   <div class="grid">
-    <div class="card"><h3>Lesson Plans</h3><p>Ready-to-use educational resources.</p></div>
-    <div class="card"><h3>Student Projects</h3><p>Community-based investigations.</p></div>
-    <div class="card"><h3>Teacher Support</h3><p>Professional development tools.</p></div>
-  </div>
+    <div class="card"><h3>Lesson Plans</h3><p>Ready-to-use educational resources such as childrens books and research books
+      to inspire all types of research, especially ones based on pollution and PM2.5. PM2.5 is a problem that needs to be looked
+      at more. At one point, if we don't care about this issue, there might not be any recovering.
+    </p></div>
+    <div class="card"><h3>Workshops</h3><p>Community-based talks and discussions can be hosted around a public area or 
+      as an after school extracurricular or program. Can involve all types of ages in school, from elementary to high school, 
+      and can 
+    </p></div>
 </section>
 
 <section id="resources">
@@ -300,9 +383,9 @@
       <button class="buy-btn" onclick="openTab('shop', this)">Buy Now</button>
     </div>
     <div class="card">
-      <h3>Reusable Water Bottle</h3>
-      <p>BPA-free, durable water bottle.</p>
-      <div class="price">$18</div>
+      <h3>AM for PM Book</h3>
+      <p>Learn about the research journey taken to learn more about this particle</p>
+      <div class="price">$30</div>
       <button class="buy-btn" onclick="openTab('shop', this)">Buy Now</button>
     </div>
   </div>
@@ -319,7 +402,7 @@
     <label>Product</label>
     <select id="product">
       <option>AM for PM T-Shirt — $25</option>
-      <option>Reusable Water Bottle — $18</option>
+      <option>AM for PM Book — $30</option>
     </select>
     <label>Quantity</label>
     <input id="quantity" type="number" min="1" value="1" />
@@ -330,7 +413,7 @@
 </section>
 
 <footer>
-  © 2025 AM for PM | Advancing Clean Air Through Education
+  © 2026 AM for PM | Advancing Clean Air Through Education and Awareness
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>

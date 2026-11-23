@@ -2426,10 +2426,14 @@ const CONFIG = {
   emailjsService: 'service_imuassu',
   orderTemplate: 'template_ossz99f',
 
-  // TODO: in EmailJS, create a second template for messages with the variables
-  // {{name}} {{email}} {{role}} {{topic}} {{message}}, then paste its ID here.
-  // It is used by the contact form, the alert sign-up and the ambassador application.
-  // Until then, those forms open the visitor's email app instead.
+  // The contact form, alert sign-up and ambassador application are sent with
+  // EmailJS too. If this is left empty they use the order template above, so
+  // they work right away. In those emails:
+  //   Product  = which form it came from (e.g. "[Ambassador application]")
+  //   Quantity = who they are (teacher, student, grade...)
+  //   Address  = all the other details they typed
+  // OPTIONAL: for nicer emails, make a second EmailJS template with the variables
+  // {{form}} {{name}} {{email}} {{role}} {{topic}} {{message}} and paste its ID here.
   contactTemplate: '',
 
   // TODO: the email address people can reach you at (shown in the footer).
@@ -2540,25 +2544,31 @@ function setStatus(node, text, kind) {
   node.textContent = text;
 }
 
-// Sends a message through the contact template, or falls back to the visitor's email app.
+// Sends the contact, alert and ambassador forms with EmailJS, the same way as the shop order.
 function sendMessage(form, statusNode, data, successText) {
-  if (!CONFIG.contactTemplate || !emailReady) {
-    if (CONFIG.contactEmail) {
-      const body = `Name: ${data.name}\nEmail: ${data.email}\nI am a: ${data.role}\n\n${data.message}`;
-      location.href = 'mailto:' + CONFIG.contactEmail +
-        '?subject=' + encodeURIComponent('AM for PM: ' + data.topic) +
-        '&body=' + encodeURIComponent(body);
-    } else {
-      setStatus(statusNode, 'This form is being set up. Please check back soon.', 'err');
-    }
-    return;
-  }
+  if (!emailReady) { setStatus(statusNode, 'This form is unavailable right now. Please try again later.', 'err'); return; }
+
+  const details = (data.topic ? 'Topic: ' + data.topic + '\n' : '') + (data.message || '');
+  const payload = {
+    // fields the order template already uses
+    name: data.name,
+    email: data.email,
+    product: '[' + data.form + ']',
+    quantity: data.role,
+    address: details,
+    // extra fields for a dedicated template (ignored by the order template)
+    form: data.form,
+    role: data.role,
+    topic: data.topic || '',
+    message: details
+  };
+
   const button = form.querySelector('button[type="submit"]');
   button.disabled = true;
   setStatus(statusNode, 'Sending...');
-  emailjs.send(CONFIG.emailjsService, CONFIG.contactTemplate, data)
+  emailjs.send(CONFIG.emailjsService, CONFIG.contactTemplate || CONFIG.orderTemplate, payload)
     .then(() => { setStatus(statusNode, successText, 'ok'); form.reset(); })
-    .catch(() => setStatus(statusNode, 'Something went wrong. Please try again.', 'err'))
+    .catch(() => setStatus(statusNode, 'Something went wrong sending this. Please try again.', 'err'))
     .finally(() => { button.disabled = false; });
 }
 
@@ -2592,6 +2602,7 @@ $('orderForm').addEventListener('submit', function (e) {
 $('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
   sendMessage(this, $('contact-status'), {
+    form: 'Contact form',
     name: $('c-name').value, email: $('c-email').value, role: $('c-role').value,
     topic: $('c-topic').value, message: $('c-message').value
   }, 'Thank you! We will get back to you soon.');
@@ -2600,6 +2611,7 @@ $('contactForm').addEventListener('submit', function (e) {
 $('alertForm').addEventListener('submit', function (e) {
   e.preventDefault();
   sendMessage(this, $('alert-status'), {
+    form: 'Air alert sign-up',
     name: '(alert sign-up)', email: $('al-email').value, role: 'Alert subscriber',
     topic: 'Air alert sign-up',
     message: `City: ${$('al-city').value}\nAlert level: ${$('al-level').value}`
@@ -2609,6 +2621,7 @@ $('alertForm').addEventListener('submit', function (e) {
 $('ambForm').addEventListener('submit', function (e) {
   e.preventDefault();
   sendMessage(this, $('amb-status'), {
+    form: 'Ambassador application',
     name: $('amb-name').value, email: $('amb-email').value, role: $('amb-grade').value,
     topic: 'Ambassador application',
     message: `School: ${$('amb-school').value}\nCity: ${$('amb-city').value}\n\n${$('amb-why').value}`

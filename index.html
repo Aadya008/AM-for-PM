@@ -3,10 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AM for PM | A Nationwide Clean Air Initiative</title>
+  <title>AM for PM | Student-Led Clean Air Initiative on PM2.5</title>
 
-  <!-- Favicon for browser tab (cloud icon PNG 32x32) -->
+  <!-- SEO: what Google shows under the link -->
+  <meta name="description" content="AM for PM is a student-led clean air initiative explaining PM2.5 air pollution: what it is, where it comes from, how it harms health and the environment, and what families, schools and communities can do. Check your air, free lessons and workshops." />
+  <link rel="canonical" href="https://amforpm.org/" />
+
+  <!-- Social share preview (WhatsApp, iMessage, LinkedIn, Facebook, X) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AM for PM" />
+  <meta property="og:title" content="AM for PM: Clean Air Starts With Understanding PM2.5" />
+  <meta property="og:description" content="Check the PM2.5 level where you live, learn the science, and bring a free clean-air workshop to your school." />
+  <meta property="og:url" content="https://amforpm.org/" />
+  <!-- TODO: replace with a 1200x630 share image (logo + one big stat) when you have one -->
+  <meta property="og:image" content="https://amforpm.org/IMG_0656%20copy.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#1B5E20" />
+
+  <!-- Tells Google who you are -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AM for PM",
+    "url": "https://amforpm.org/",
+    "description": "A student-led clean air initiative focused on PM2.5 education, research and public action.",
+    "founder": { "@type": "Person", "name": "Aadya Mishra" }
+  }
+  </script>
+
+  <!-- Favicon for browser tab -->
   <link rel="icon" type="image/png" sizes="32x32" href="https://cdn-icons-png.flaticon.com/512/414/414825.png" />
+
+  <!-- Fonts: Fraunces (headings) + Inter (easy-to-read body text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,171 +46,392 @@
   <style>
     :root {
       --primary: #1e5aa8;
-      --secondary: #eaf2fb;
+      --primary-dark: #14437d;
+      --secondary: #eef4fb;
       --accent: #FFB300;
       --dark: #0f2f5f;
+      --green: #1B5E20;
+      --sky: #4FC3F7;
       --light: #ffffff;
+      --ink: #1d2733;
+      --muted: #5b6776;
+      --line: #dbe4ef;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(15, 47, 95, 0.08);
+      --shadow-hover: 0 16px 40px rgba(15, 47, 95, 0.14);
+      --heading: "Fraunces", Georgia, "Times New Roman", serif;
+      --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      font-family: Georgia, "Times New Roman", serif;
-    }
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      background-color: var(--secondary);
-      color: #1f1f1f;
+      background: var(--secondary);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 17px;
       line-height: 1.7;
     }
 
+    a { color: var(--primary); }
+    a:hover { color: var(--primary-dark); }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--accent);
+      color: #000;
+      padding: 0.5rem 1rem;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 1rem; }
+
+    h1, h2, h3, h4 { font-family: var(--heading); line-height: 1.25; }
+
+    h2 {
+      color: var(--dark);
+      font-size: 2.4rem;
+      margin: 0 0 0.5rem;
+    }
+
+    h3 {
+      color: var(--dark);
+      font-size: 1.3rem;
+      margin: 0 0 0.5rem;
+    }
+
+    p { margin: 0 0 1rem; }
+
+    /* ---------- HEADER / HERO ---------- */
     header {
-      background: linear-gradient(135deg, #1B5E20, #4FC3F7);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--green), #2e7d62 45%, var(--sky));
       color: white;
-      padding: 4rem 2rem;
+      padding: 5rem 2rem 4.5rem;
       text-align: center;
     }
 
+    /* floating "particles" in the hero */
+    .particles span {
+      position: absolute;
+      bottom: -20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      animation: rise linear infinite;
+    }
+    .particles span:nth-child(1)  { left: 5%;  width: 6px;  height: 6px;  animation-duration: 14s; }
+    .particles span:nth-child(2)  { left: 15%; width: 3px;  height: 3px;  animation-duration: 10s; animation-delay: 2s; }
+    .particles span:nth-child(3)  { left: 27%; width: 10px; height: 10px; animation-duration: 18s; animation-delay: 1s; }
+    .particles span:nth-child(4)  { left: 38%; width: 4px;  height: 4px;  animation-duration: 12s; animation-delay: 4s; }
+    .particles span:nth-child(5)  { left: 52%; width: 7px;  height: 7px;  animation-duration: 16s; animation-delay: 3s; }
+    .particles span:nth-child(6)  { left: 63%; width: 3px;  height: 3px;  animation-duration: 9s;  animation-delay: 5s; }
+    .particles span:nth-child(7)  { left: 74%; width: 9px;  height: 9px;  animation-duration: 20s; }
+    .particles span:nth-child(8)  { left: 83%; width: 5px;  height: 5px;  animation-duration: 13s; animation-delay: 6s; }
+    .particles span:nth-child(9)  { left: 92%; width: 4px;  height: 4px;  animation-duration: 11s; animation-delay: 2s; }
+    .particles span:nth-child(10) { left: 46%; width: 12px; height: 12px; animation-duration: 22s; animation-delay: 7s; }
+
+    @keyframes rise {
+      from { transform: translateY(0); opacity: 0; }
+      10%  { opacity: 1; }
+      to   { transform: translateY(-520px); opacity: 0; }
+    }
+
+    .hero-inner { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    header .eyebrow {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+    }
+
     header h1 {
-      font-size: 3.2rem;
-      margin-bottom: 0.75rem;
+      font-size: 3.6rem;
+      margin: 0.5rem 0 0.75rem;
     }
 
     header p {
-      font-size: 1.3rem;
-      max-width: 900px;
+      font-size: 1.25rem;
+      max-width: 760px;
       margin: auto;
+      opacity: 0.95;
     }
 
+    .hero-buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      background: var(--accent);
+      color: #1f1f1f;
+      border: 2px solid var(--accent);
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      font-family: var(--body);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+
+    .hero-btn.outline {
+      background: transparent;
+      color: white;
+      border-color: white;
+    }
+
+    /* ---------- NAV ---------- */
     nav {
-      background-color: var(--light);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      border-bottom: 2px solid var(--primary);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 2px 12px rgba(15, 47, 95, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     nav button {
       background: none;
       border: none;
-      padding: 1rem 1.75rem;
+      border-bottom: 3px solid transparent;
+      padding: 1rem 1.1rem;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
+      font-family: var(--body);
+      font-size: 0.95rem;
+      font-weight: 600;
       color: var(--dark);
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: color 0.2s, border-color 0.2s;
     }
+
+    nav button i { color: var(--muted); transition: color 0.2s; }
 
     nav button.active,
     nav button:hover {
       color: var(--primary);
-      border-bottom: 4px solid var(--accent);
+      border-bottom-color: var(--accent);
     }
 
-    section {
+    nav button.active i,
+    nav button:hover i { color: var(--primary); }
+
+    /* ---------- SECTIONS ---------- */
+    main section {
       display: none;
       padding: 4rem 2rem;
-      max-width: 1200px;
+      max-width: 1180px;
       margin: auto;
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.45s ease;
     }
 
-    section.active {
-      display: block;
-    }
+    main section.active { display: block; }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    h2 {
-      color: var(--dark);
-      font-size: 2.4rem;
-      margin-bottom: 0.5rem;
+    .section-head { max-width: 800px; margin-bottom: 2rem; }
+
+    .lead {
+      font-size: 1.15rem;
+      color: var(--muted);
     }
 
-    h3 {
-      color: var(--primary);
-      margin-top: 0;
-    }
+    .topic { margin-top: 4.5rem; scroll-margin-top: 80px; }
 
+    .topic > h2 { font-size: 2rem; }
+
+    .readable { max-width: 820px; }
+
+    /* ---------- CARDS ---------- */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 1.5rem;
       margin-top: 2rem;
     }
 
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+
     .card {
       background: var(--light);
-      padding: 2.5rem;
-      border-radius: 14px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      background: #e3eefb;
+      color: var(--primary);
+    }
+
+    .icon.green { background: #e3f3e6; color: var(--green); }
+    .icon.amber { background: #fff3d6; color: #a26a00; }
+    .icon.red   { background: #fde6e6; color: #b3261e; }
+    .icon.purple{ background: #efe6fb; color: #6a3fa0; }
+
     .highlight {
-      background: #f5f8ff;
+      background: var(--light);
       border-left: 6px solid var(--accent);
       padding: 1.5rem 2rem;
       margin: 2rem 0;
-      border-radius: 8px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
     }
 
-    .price {
-      font-weight: bold;
-      margin: 0.75rem 0 1rem;
+    .callout {
+      background: linear-gradient(135deg, #e7f1fc, #eaf6ee);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
     }
 
+    .callout i { font-size: 1.6rem; color: var(--primary); margin-top: 0.2rem; }
+    .callout p:last-child { margin: 0; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: #e3eefb;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    ul.checks { list-style: none; padding: 0; margin: 0; }
+    ul.checks li { padding-left: 1.8rem; position: relative; margin-bottom: 0.6rem; }
+    ul.checks li::before {
+      content: "✓";
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+      color: var(--green);
+    }
+
+    .src {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ---------- BUTTONS & FORMS ---------- */
     .buy-btn {
       background: var(--primary);
       color: white;
       border: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 25px;
+      border-radius: 999px;
       cursor: pointer;
+      font-family: var(--body);
       font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .buy-btn:hover { background: var(--primary-dark); color: white; transform: translateY(-1px); }
+    .buy-btn:disabled { opacity: 0.6; cursor: wait; }
+
+    .price {
+      font-family: var(--heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0.5rem 0 1rem;
     }
 
     form {
       background: var(--light);
-      padding: 3rem;
-      border-radius: 16px;
-      max-width: 600px;
-      margin: 2rem auto 0;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      max-width: 620px;
+      margin: 2.5rem auto 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
     }
 
     label {
       display: block;
-      margin-top: 1rem;
-      font-weight: bold;
+      margin-top: 1.1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
     }
 
-    input,
-    select {
+    input, select, textarea {
       width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.3rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      padding: 0.75rem 0.9rem;
+      margin-top: 0.35rem;
+      border-radius: 10px;
+      border: 1px solid #c8d3e0;
+      font-family: var(--body);
+      font-size: 1rem;
+      background: #fbfdff;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .image-banner {
-      width: 100%;
-      border-radius: 14px;
-      margin-top: 2rem;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 90, 168, 0.15);
     }
 
+    .form-note { font-size: 0.9rem; color: var(--muted); margin-top: 1rem; }
+    .form-status { margin-top: 1rem; font-weight: 600; }
+
+    /* ---------- IMAGES ---------- */
     .image-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -186,263 +439,2867 @@
       margin-top: 2rem;
     }
 
-  .image-grid img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-  }
+    .image-grid figure { margin: 0; }
 
+    .image-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .image-grid figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+
+    .founder {
+      display: grid;
+      grid-template-columns: minmax(220px, 360px) 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .founder img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+    /* ---------- KEY NUMBERS ---------- */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--accent);
+    }
+
+    .stat .num {
+      font-family: var(--heading);
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.15;
+    }
+
+    .stat p { margin: 0.5rem 0; }
+
+    /* ---------- PM2.5 GUIDE ---------- */
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .toc button {
+      background: var(--light);
+      border: 1px solid var(--line);
+      color: var(--dark);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-family: var(--body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .toc button:hover { background: #e3eefb; border-color: var(--primary); }
+
+    .size-figure {
+      background: var(--light);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .size-figure svg { width: 100%; height: auto; display: block; }
+
+    .journey {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1.25rem;
+      counter-reset: step;
+    }
+
+    .journey li {
+      background: var(--light);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem 1.25rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      counter-increment: step;
+    }
+
+    .journey li::before {
+      content: counter(step);
+      position: absolute;
+      top: -14px;
+      left: 1.25rem;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .journey li h4 { margin: 0.4rem 0 0.4rem; color: var(--dark); font-size: 1.05rem; }
+    .journey li p { font-size: 0.95rem; margin: 0; color: var(--muted); }
+
+    table.data {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    table.data th, table.data td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    table.data th { background: var(--dark); color: #fff; font-weight: 600; }
+    table.data tr:last-child td { border-bottom: none; }
+
+    .swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+      vertical-align: -2px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    details {
+      background: var(--light);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-top: 0.85rem;
+      box-shadow: 0 4px 14px rgba(15, 47, 95, 0.05);
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 1.1rem 1.4rem;
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "▾";
+      font-size: 1.2rem;
+      color: var(--primary);
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after { transform: rotate(180deg); }
+
+    details .answer { padding: 0 1.4rem 1.2rem; color: #354150; }
+
+    .myth { color: #b3261e; font-weight: 700; margin-right: 0.35rem; }
+    .fact { color: var(--green); font-weight: 700; margin-right: 0.35rem; }
+
+    /* ---------- AIR QUALITY WIDGET ---------- */
+    .aq-box {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      max-width: 760px;
+      margin: 2rem auto 0;
+    }
+
+    .aq-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .aq-row input { flex: 1; min-width: 200px; margin-top: 0; }
+
+    .aq-btn-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .aq-btn-secondary:hover { background: var(--secondary); color: var(--primary); }
+
+    .quick-cities {
+      margin-top: 0.9rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .quick-cities button {
+      background: #eef4fb;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      font-family: var(--body);
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    .quick-cities button:hover { border-color: var(--primary); }
+
+    #aq-out { margin-top: 1.75rem; }
+    #aq-out:empty { display: none; }
+
+    .aq-result {
+      background: #f7fafd;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .aq-place { font-weight: 700; font-size: 1.15rem; }
+
+    .aq-badge {
+      display: inline-block;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0.6rem 0;
+    }
+
+    .aq-scale {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.5rem;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .aq-scale div { padding: 0.6rem 0.8rem; border-radius: 8px; }
+
+    .small-print { font-size: 0.85rem; color: var(--muted); }
+
+    /* ---------- NEWS ---------- */
+    .news-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .news-date { color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
+
+    .news-link {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .news-link:hover { background: var(--primary-dark); color: white; }
+
+    .news-source { font-weight: 700; color: var(--primary); }
+
+    /* ---------- FOOTER ---------- */
     footer {
       text-align: center;
-      padding: 2.5rem;
-      background: linear-gradient(135deg, #1B5E20, #4FC3F7);
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, var(--green), var(--sky));
       color: white;
       margin-top: 4rem;
+    }
+
+    footer a { color: white; }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .footer-links button {
+      background: none;
+      border: none;
+      color: white;
+      font-family: var(--body);
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      font-size: 1.6rem;
+      margin: 1rem 0;
+    }
+
+    .footer-small { font-size: 0.85rem; opacity: 0.9; max-width: 800px; margin: 1rem auto 0; }
+
+    /* ---------- BACK TO TOP ---------- */
+    #to-top {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-hover);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 20;
+    }
+
+    #to-top.show { opacity: 1; pointer-events: auto; }
+
+    /* ---------- MOBILE ---------- */
+    /* =========================================================
+       NEW FEATURES
+       ========================================================= */
+
+    nav button { padding: 0.95rem 0.8rem; font-size: 0.92rem; }
+
+    .panel {
+      background: var(--light);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      margin-top: 2.5rem;
+      scroll-margin-top: 80px;
+    }
+
+    .panel > h2 { font-size: 1.8rem; }
+
+    .btn-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.25rem; align-items: center; }
+
+    .buy-btn.ghost {
+      background: #fff;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .buy-btn.ghost:hover { background: var(--secondary); color: var(--primary); }
+
+    .buy-btn.amber { background: var(--accent); color: #1f1f1f; }
+    .buy-btn.amber:hover { background: #f0a500; color: #1f1f1f; }
+
+    /* ---------- 5-day forecast ---------- */
+    .forecast { margin-top: 1.5rem; }
+    .forecast h4 { margin: 0 0 0.25rem; color: var(--dark); font-size: 1.05rem; }
+    .forecast svg { width: 100%; height: auto; display: block; margin-top: 0.5rem; }
+    .share-status { font-size: 0.9rem; color: var(--green); font-weight: 600; }
+
+    /* ---------- Exposure calculator ---------- */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.25rem 1.25rem;
+    }
+
+    .calc-result {
+      margin-top: 1.5rem;
+      background: #f7fafd;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .calc-result:empty { display: none; }
+
+    .calc-big {
+      font-family: var(--heading);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+
+    .bar-row { display: grid; grid-template-columns: 120px 1fr 80px; gap: 0.75rem; align-items: center; margin-top: 0.6rem; font-size: 0.92rem; }
+    .bar-track { height: 14px; background: #e6edf5; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; background: var(--primary); }
+
+    /* ---------- Interactive particle journey ---------- */
+    .journey-stage {
+      background: linear-gradient(180deg, #eaf4ff, #f9fcff);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 1.5rem;
+    }
+
+    .journey-stage svg { width: 100%; height: auto; display: block; }
+    #particle { transition: transform 1.1s ease-in-out; }
+    .body-part { transition: opacity 0.4s, filter 0.4s; }
+    .body-part.hl { filter: drop-shadow(0 0 10px rgba(229, 57, 53, 0.85)); }
+
+    .journey-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      background: var(--light);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 1.5rem 1.75rem;
+      margin-top: 1rem;
+    }
+
+    .journey-text { min-height: 110px; }
+    .journey-text h3 { margin-bottom: 0.3rem; }
+    .journey-text p { margin: 0; }
+
+    .journey-controls { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+    .journey-dots { display: flex; gap: 6px; margin: 0 0.5rem; }
+    .journey-dots button {
+      width: 12px; height: 12px; padding: 0;
+      border-radius: 50%; border: none; cursor: pointer;
+      background: #c8d3e0;
+    }
+    .journey-dots button.active { background: var(--primary); }
+
+    /* ---------- Quiz ---------- */
+    .quiz { max-width: 780px; margin: 2rem auto 0; }
+    .quiz-meta { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted); font-weight: 600; }
+    .quiz-progress { height: 8px; background: #e6edf5; border-radius: 999px; overflow: hidden; margin: 0.5rem 0 1.5rem; }
+    .quiz-progress span { display: block; height: 100%; background: var(--primary); transition: width 0.3s; }
+    .quiz-q { font-family: var(--heading); font-size: 1.45rem; color: var(--dark); line-height: 1.35; }
+    .quiz-options { display: grid; gap: 0.75rem; margin-top: 1.25rem; }
+    .quiz-options button {
+      text-align: left;
+      background: #fbfdff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      font-family: var(--body);
+      font-size: 1rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .quiz-options button:hover:not(:disabled) { border-color: var(--primary); }
+    .quiz-options button:disabled { cursor: default; }
+    .quiz-options button.correct { border-color: #2e7d32; background: #e8f5e9; }
+    .quiz-options button.wrong { border-color: #c62828; background: #fdecea; }
+    .quiz-explain { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 12px; background: #f3f7fc; border-left: 5px solid var(--primary); }
+    .score-big { font-family: var(--heading); font-size: 4.5rem; font-weight: 700; color: var(--dark); line-height: 1; }
+
+    /* ---------- Kids' corner ---------- */
+    .kids-hero {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: linear-gradient(135deg, #fff6dc, #e4f4ff);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 2rem 2.5rem;
+    }
+
+    .kids-hero h2 { font-size: 2.3rem; }
+    .kids-hero p { font-size: 1.15rem; }
+
+    #kids .card h3 { font-size: 1.25rem; }
+    #kids .card p { font-size: 1.05rem; }
+
+    .sort-list { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
+    .sort-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      background: var(--light);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem 1.1rem;
+      font-size: 1.05rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sort-item.right { border-color: #2e7d32; background: #e8f5e9; }
+    .sort-item.oops { border-color: #c62828; background: #fdecea; }
+    .sort-item .why { grid-column: 1 / -1; font-size: 0.92rem; color: #354150; }
+    .sort-item .why:empty { display: none; }
+    .sort-btns { display: flex; gap: 0.5rem; }
+    .sort-btns button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-family: var(--body);
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .sort-btns .clean { background: #c8e6c9; color: #1b5e20; }
+    .sort-btns .dirty { background: #d7dbe0; color: #37424f; }
+    .sort-btns button:disabled { opacity: 0.5; cursor: default; }
+    .sort-score { font-weight: 700; color: var(--dark); margin-top: 1rem; }
+
+    ol.steps-list { padding-left: 1.3rem; margin: 0.5rem 0 0; }
+    ol.steps-list li { margin-bottom: 0.4rem; }
+
+    /* ---------- Ambassadors ---------- */
+    .map-wrap { position: relative; margin-top: 1.5rem; }
+    #chapter-map {
+      height: 440px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      background: #dfeaf5;
+      z-index: 0;
+    }
+    .map-note {
+      position: absolute;
+      left: 50%;
+      bottom: 1.25rem;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 999px;
+      padding: 0.6rem 1.25rem;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      color: var(--dark);
+      z-index: 500;
+      text-align: center;
+      max-width: 90%;
+    }
+    .map-count { font-weight: 700; color: var(--primary); }
+
+    /* ---------- Classroom AQI display ---------- */
+    #classroom {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      background: #00e400;
+      color: #111;
+      transition: background 0.6s;
+    }
+    #classroom.open { display: flex; }
+    #classroom.dark-text { color: #111; }
+    #classroom.light-text { color: #fff; }
+    .cr-top, .cr-bottom {
+      position: absolute;
+      left: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 600;
+    }
+    .cr-top { top: 1.25rem; font-size: clamp(1rem, 2.2vw, 1.6rem); }
+    .cr-bottom { bottom: 1rem; font-size: 0.95rem; flex-wrap: wrap; }
+    .cr-label { font-size: clamp(1rem, 2.2vw, 1.5rem); font-weight: 600; opacity: 0.85; }
+    .cr-aqi { font-family: var(--heading); font-size: clamp(6rem, 24vw, 17rem); font-weight: 700; line-height: 1; }
+    .cr-cat { font-size: clamp(1.6rem, 4.5vw, 3.4rem); font-weight: 700; }
+    .cr-recess {
+      margin-top: 1.5rem;
+      font-size: clamp(1.3rem, 3.6vw, 2.6rem);
+      background: rgba(255, 255, 255, 0.9);
+      color: #111;
+      padding: 0.7rem 2rem;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .cr-tip { max-width: 950px; font-size: clamp(1rem, 2vw, 1.45rem); margin-top: 1.25rem; }
+    .cr-bottom button {
+      background: rgba(255, 255, 255, 0.9);
+      color: #111;
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-family: var(--body);
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .panel { padding: 1.5rem; }
+      .journey-panel { grid-template-columns: 1fr; }
+      .kids-hero { grid-template-columns: 1fr; text-align: center; padding: 1.5rem; }
+      .kids-hero svg { max-width: 200px; margin: auto; }
+      .sort-item { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 90px 1fr 64px; }
+      #chapter-map { height: 340px; }
+    }
+
+    @media print {
+      header, nav, footer, #to-top { display: none !important; }
+    }
+
+    @media (max-width: 700px) {
+      body { font-size: 16px; }
+      header { padding: 3.5rem 1.25rem 3rem; }
+      header h1 { font-size: 2.6rem; }
+      header p { font-size: 1.1rem; }
+      main section { padding: 2.5rem 1.25rem; }
+      h2 { font-size: 1.9rem; }
+      .topic > h2 { font-size: 1.65rem; }
+      .card, form, .aq-box { padding: 1.5rem; }
+      .grid.two { grid-template-columns: 1fr; }
+      .founder { grid-template-columns: 1fr; }
+      .callout { flex-direction: column; gap: 0.5rem; }
+      nav { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; }
+      nav button { padding: 0.8rem 0.85rem; font-size: 0.9rem; white-space: nowrap; flex: 0 0 auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .particles { display: none; }
     }
   </style>
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to content</a>
+
 <header>
-  <h1>AM for PM</h1>
-  <p>A nationwide non-profit initiative advancing education, research, and public action on particulate matter and air quality.</p>
+  <div class="particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-inner">
+    <span class="eyebrow">A Worldwide Clean Air Initiative</span>
+    <h1>AM for PM</h1>
+    <p>A student-led initiative advancing education, research, and public action on fine particle pollution (PM2.5) and the air we all breathe.</p>
+    <div class="hero-buttons">
+      <button class="hero-btn" data-goto="air"><i class="fa-solid fa-magnifying-glass-location"></i> Check your air today</button>
+      <button class="hero-btn outline" data-goto="pm25"><i class="fa-solid fa-book-open"></i> Learn about PM2.5</button>
+    </div>
+  </div>
 </header>
 
-<nav>
-  <button class="active" onclick="openTab('home', this)">
-    <i class="fa-solid fa-house"></i> Home
-  </button>
-  <button onclick="openTab('pm', this)">
-    <i class="fa-solid fa-wind"></i> Particulate Matter
-  </button>
-  <button onclick="openTab('pm25', this)">
-    <i class="fa-solid fa-lungs"></i> PM2.5
-  </button>
-  <button onclick="openTab('research', this)">
-    <i class="fa-solid fa-microscope"></i> Research and Current News
-  </button>
-  <button onclick="openTab('schools', this)">
-    <i class="fa-solid fa-school"></i> Education
-  </button>
-  <button onclick="openTab('resources', this)">
-    <i class="fa-solid fa-book-open"></i> Resources
-  </button>
-  <button onclick="openTab('shop', this)">
-    <i class="fa-solid fa-cart-shopping"></i> Shop
-  </button>
+<nav aria-label="Main">
+  <button data-tab="home"><i class="fa-solid fa-house"></i> Home</button>
+  <button data-tab="air"><i class="fa-solid fa-magnifying-glass-location"></i> Check Your Air</button>
+  <button data-tab="pm"><i class="fa-solid fa-wind"></i> Particulate Matter</button>
+  <button data-tab="pm25"><i class="fa-solid fa-lungs"></i> PM2.5 Guide</button>
+  <button data-tab="quiz"><i class="fa-solid fa-circle-question"></i> Quiz</button>
+  <button data-tab="kids"><i class="fa-solid fa-child-reaching"></i> Kids' Corner</button>
+  <button data-tab="schools"><i class="fa-solid fa-chalkboard-user"></i> Education</button>
+  <button data-tab="ambassadors"><i class="fa-solid fa-map-location-dot"></i> Ambassadors</button>
+  <button data-tab="research"><i class="fa-solid fa-microscope"></i> Research &amp; News</button>
+  <button data-tab="shop"><i class="fa-solid fa-cart-shopping"></i> Shop</button>
+  <button data-tab="involved"><i class="fa-solid fa-hand-holding-heart"></i> Get Involved</button>
 </nav>
 
-<!-- HOME TAB -->
-<section id="home" class="active">
-  
+<main id="main-content">
 
+<!-- ================= HOME ================= -->
+<section id="home">
 
-  <h2>Our Mission</h2>
-  <p>
-    AM for PM works to increase nationwide understanding of airborne particulate
-    matter and its impacts on human health and the environment.
-  </p>
+  <div class="section-head">
+    <span class="eyebrow">Our Mission</span>
+    <h2>Clean air starts with understanding it</h2>
+    <p class="lead">
+      AM for PM works to increase worldwide understanding of airborne particulate
+      matter and its impacts on human health and the environment.
+    </p>
+  </div>
 
   <div class="highlight">
     <strong>Why it matters:</strong>
-    You might be wondering, what is so wrong with pollution? Answer: Basically everything. 
-    It can greatly impact different scales of society, from individual well-being to the downfall of a country's economy.
-    Some of the most harmful pollutants causing this issue are Carbon Dioxide, Nitrogen Dioxide, and especially, PM.
-    When specifically looking at fine particles like PM2.5, they are among the most harmful air pollutants, 
+    You might be wondering, what is so wrong with pollution? Answer: basically everything.
+    It can impact every scale of society, from individual well-being to a country's economy.
+    Some of the most harmful air pollutants are nitrogen dioxide, ozone, and especially particulate matter (PM).
+    Fine particles like PM2.5 are among the most harmful air pollutants,
     yet remain widely misunderstood.
   </div>
-  <h2>About</h2>
-  <div class="highlight">
-    <strong>AM for PM</strong>
-    is a student-led environmental initiative dedicated to raising awareness about PM2.5 air pollution and 
-    its impact on human health. Our mission is to make environmental 
-    science accessible and meaningful for students and communities through research, education, workshops, and public outreach. 
-    We believe every person deserves access to clean air and the knowledge to protect their health and environment.
 
+  <div class="topic" style="margin-top:3rem;">
+    <span class="eyebrow">The problem in numbers</span>
+    <h2>PM2.5 by the numbers</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">7.9 million</div>
+        <p>deaths worldwide were linked to air pollution in 2023, about 1 in every 8 deaths.</p>
+        <div class="src">Source: <a href="https://www.stateofglobalair.org/" target="_blank" rel="noopener">State of Global Air 2025</a></div>
+      </div>
+      <div class="stat">
+        <div class="num">4.9 million</div>
+        <p>of those deaths were caused by outdoor PM2.5 alone.</p>
+        <div class="src">Source: <a href="https://www.stateofglobalair.org/" target="_blank" rel="noopener">State of Global Air 2025</a></div>
+      </div>
+      <div class="stat">
+        <div class="num">152 million</div>
+        <p>Americans (44%) live in places with failing grades for ozone or particle pollution.</p>
+        <div class="src">Source: <a href="https://www.lung.org/research/sota/key-findings" target="_blank" rel="noopener">American Lung Association, State of the Air 2026</a></div>
+      </div>
+      <div class="stat">
+        <div class="num">5 µg/m³</div>
+        <p>is the World Health Organization's guideline for yearly average PM2.5. Most people on Earth breathe more.</p>
+        <div class="src">Source: <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" target="_blank" rel="noopener">WHO Air Quality Guidelines</a></div>
+      </div>
+    </div>
   </div>
-  <img
-    src="IMG_0656 copy.png"
-    alt="AM for PM clean air initiative"
-    style="
-      width:100%;
-      max-width:420px;
-      margin:2rem auto 0;
-      display:block;
-      border-radius:12px;
-    "
-  />
 
-  <p style="text-align:center; margin-top:1rem; font-style:italic; color:#444;">
-    Aadya Mishra - Founder of "AM for PM" Initiative
-  </p>
+  <div class="topic" style="margin-top:4rem;">
+    <span class="eyebrow">About</span>
+    <h2>Who we are</h2>
+    <div class="founder">
+      <figure style="margin:0;">
+        <img src="IMG_0656%20copy.png" alt="Aadya Mishra, founder of AM for PM" />
+        <figcaption class="src" style="text-align:center; margin-top:0.6rem; font-style:italic;">
+          Aadya Mishra, Founder of the "AM for PM" Initiative
+        </figcaption>
+      </figure>
+      <div>
+        <p>
+          <strong>AM for PM</strong> is a student-led environmental initiative dedicated to raising awareness about PM2.5 air pollution and
+          its impact on human health. Our mission is to make environmental
+          science accessible and meaningful for students and communities through research, education, workshops, and public outreach.
+        </p>
+        <p>We believe every person deserves access to clean air and the knowledge to protect their health and environment.</p>
+        <ul class="checks">
+          <li>Plain-language explanations of air pollution science</li>
+          <li>Free workshops for schools and community groups</li>
+          <li>Tools to check and understand your local air</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic" style="margin-top:4rem;">
+    <span class="eyebrow">Start here</span>
+    <h2>What would you like to do?</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+        <h3>Check your air</h3>
+        <p>See the PM2.5 level where you live right now, a 5-day forecast, and what it means for your health.</p>
+        <button class="buy-btn" data-goto="air">Check now</button>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Learn about PM2.5</h3>
+        <p>Our complete guide: what it is, where it comes from, and its journey through your body.</p>
+        <button class="buy-btn" data-goto="pm25">Read the guide</button>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fa-solid fa-circle-question"></i></div>
+        <h3>Take the quiz</h3>
+        <p>Ten questions. How much do you really know about the air you breathe?</p>
+        <button class="buy-btn" data-goto="quiz">Start the quiz</button>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-calculator"></i></div>
+        <h3>Exposure calculator</h3>
+        <p>Estimate how much PM2.5 you breathed in today, based on where you spent your time.</p>
+        <button class="buy-btn" data-goto="air" data-then="calc">Calculate</button>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-child-reaching"></i></div>
+        <h3>Kids' Corner</h3>
+        <p>Meet Breezy the Clean Air Cloud, play a game, try an experiment, and print a coloring page.</p>
+        <button class="buy-btn" data-goto="kids">Let's play</button>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fa-solid fa-map-location-dot"></i></div>
+        <h3>Become an ambassador</h3>
+        <p>Start an AM for PM chapter at your school and put it on our map.</p>
+        <button class="buy-btn" data-goto="ambassadors">Learn more</button>
+      </div>
+    </div>
+  </div>
 
 </section>
 
-<section id="pm"> 
-  <h2>Understanding Particulate Matter</h2> 
-  <p> Particulate matter is a mixture of solid particles and liquid droplets suspended in the air. 
-    Made out of particles such as organic chemical compounds, soot, heavy metals, sulfates, nitrates, and acids, 
-    PM2.5 and other PMs can dangerously alter our well-being and future lifestyles. The sizes can range from PM1.0, 
-    PM2.5, and PM10. </p> 
-    <div class="image-grid"> 
-      <img src="https://plus.unsplash.com/premium_photo-1664298311043-46b3814a511f?q=80&w=2083&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Industrial air pollution" /> 
-      <img src="https://ww2.arb.ca.gov/sites/default/files/inline-images/human_hair_0.png" alt="Wildfire smoke in atmosphere" /> 
-      <img src="https://cdn.prod.website-files.com/5f23e100544c90c140f34325/67ae01a18dcc4cec81f0325e_628f9da4b487bb6b620efd28_Artboard%25201%25404x-100.jpeg" alt="Traffic pollution" /> 
-    </div> 
-      <div class="grid"> <div class="card"> 
-        <h3>Sources</h3> 
-        <p>Vehicles, power plants, construction, agriculture, and wildfires.</p> 
-      </div> <div class="card"> 
-        <h3>Sizes</h3> 
-        <p>Includes PM10, PM2.5, and ultrafine particles.</p> 
-      </div> 
-      <div class="card"> 
-        <h3>Exposure</h3> 
-        <p>Particles can be inhaled deep into the lungs and bloodstream.</p> 
-      </div> 
-    </div>
-    <div class="grid">
-      <div class="card"><h3>Image Source</h3><p>plus.unsplash.com</p>
-      </div>
-      <div class="card"><h3>Image Source</h3><p>ww2.arb.ca.gov</p>
-      </div>
-      <div class="card"><h3>Image Source</h3><p>https://atmotube.com/</p>
-      </div>
-    </div> 
-  </section>
+<!-- ================= CHECK YOUR AIR ================= -->
+<section id="air">
+  <div class="section-head">
+    <span class="eyebrow">Live tool</span>
+    <h2>What's my air today?</h2>
+    <p class="lead">Type your city, or use your location, to see the current fine particle pollution (PM2.5) near you and a 5-day forecast.</p>
+  </div>
 
-  <section id="pm25">
-    <h2>PM2.5</h2> 
-    <p>PM2.5 particles are smaller than 2.5 micrometers and pose serious health risks.</p>
+  <div class="aq-box">
+    <div class="aq-row">
+      <input id="aq-city" placeholder="Enter a city, e.g. Louisville" aria-label="City name" />
+      <button id="aq-go" class="buy-btn">Check</button>
+      <button id="aq-loc" class="buy-btn aq-btn-secondary"><i class="fa-solid fa-location-crosshairs"></i> Use my location</button>
+    </div>
+    <div class="quick-cities">
+      Try:
+      <button data-city="Louisville">Louisville</button>
+      <button data-city="Los Angeles">Los Angeles</button>
+      <button data-city="New York">New York</button>
+      <button data-city="Delhi">Delhi</button>
+      <button data-city="London">London</button>
+    </div>
+    <div id="aq-out" aria-live="polite"></div>
+
+    <div class="aq-scale" aria-label="Air Quality Index scale">
+      <div style="background:#00e400;">0–50 Good</div>
+      <div style="background:#ffff00;">51–100 Moderate</div>
+      <div style="background:#ff7e00;">101–150 Unhealthy for Sensitive Groups</div>
+      <div style="background:#ff0000;color:#fff;">151–200 Unhealthy</div>
+      <div style="background:#8f3f97;color:#fff;">201–300 Very Unhealthy</div>
+      <div style="background:#7e0023;color:#fff;">301+ Hazardous</div>
+    </div>
+
+    <p class="small-print" style="margin-top:1.5rem;">
+      Readings and forecasts are modeled estimates from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+      (CC BY 4.0), based on the Copernicus Atmosphere Monitoring Service. For official U.S. monitor readings, visit
+      <a href="https://www.airnow.gov" target="_blank" rel="noopener">AirNow.gov</a>.
+      This tool is for education and is not medical advice.
+    </p>
+  </div>
+
+  <!-- EXPOSURE CALCULATOR -->
+  <div class="panel" id="calc">
+    <span class="eyebrow">Exposure calculator</span>
+    <h2>How much PM2.5 did I breathe today?</h2>
+    <p>Fill in how you spent your day. If you checked your air above, your local PM2.5 level is filled in for you.</p>
+    <div class="calc-grid">
+      <div>
+        <label for="calc-pm">Outdoor PM2.5 (µg/m³)</label>
+        <input id="calc-pm" type="number" min="0" max="1000" step="0.1" value="9" />
+      </div>
+      <div>
+        <label for="calc-out">Hours outdoors</label>
+        <input id="calc-out" type="number" min="0" max="24" step="0.5" value="2" />
+      </div>
+      <div>
+        <label for="calc-act">What you did outside</label>
+        <select id="calc-act">
+          <option value="1.0">Light (walking, recess)</option>
+          <option value="1.6" selected>Moderate (biking, playing)</option>
+          <option value="3.0">Hard (running, sports practice)</option>
+        </select>
+      </div>
+      <div>
+        <label for="calc-car">Hours in a car or bus</label>
+        <input id="calc-car" type="number" min="0" max="24" step="0.5" value="1" />
+      </div>
+      <div>
+        <label for="calc-in">Hours indoors, awake</label>
+        <input id="calc-in" type="number" min="0" max="24" step="0.5" value="13" />
+      </div>
+      <div>
+        <label for="calc-sleep">Hours asleep</label>
+        <input id="calc-sleep" type="number" min="0" max="24" step="0.5" value="8" />
+      </div>
+      <div>
+        <label for="calc-src">Indoor smoke sources today</label>
+        <select id="calc-src">
+          <option value="0">None</option>
+          <option value="10">Frying or cooking on a gas stove</option>
+          <option value="20">Candles, incense or a fireplace</option>
+          <option value="30">Several of these</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="buy-btn" id="calc-go"><i class="fa-solid fa-calculator"></i> Calculate</button>
+    </div>
+    <div class="calc-result" id="calc-result" aria-live="polite"></div>
+    <p class="small-print" style="margin-top:1rem;">
+      How it works: PM2.5 breathed = concentration × how much air you breathe × time. We use typical breathing rates
+      (about 0.3 m³ per hour asleep, 0.5 m³ awake and resting, and 1 to 3 m³ when active), assume indoor air has about
+      60% of the outdoor level plus any indoor sources, and compare your day with the same day at the WHO guideline of 5 µg/m³.
+      This is a rough classroom estimate, not a medical measurement.
+    </p>
+  </div>
+
+  <!-- DAILY AIR ALERTS -->
+  <div class="panel" id="alerts">
+    <span class="eyebrow">Daily air alerts</span>
+    <h2>Get warned before a bad air day</h2>
+    <div class="grid two" style="margin-top:1rem;">
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-bell"></i></div>
+        <h3>Free official alerts, starting today</h3>
+        <p>
+          EnviroFlash, from the U.S. EPA's AirNow program and your state air agency, emails or texts your local air quality
+          forecast. You can choose to hear only when the air will be unhealthy.
+        </p>
+        <a class="buy-btn" href="https://www.enviroflash.info/signup.cfm" target="_blank" rel="noopener">Sign up for EnviroFlash</a>
+      </div>
+      <form id="alertForm" style="margin:0; max-width:none;">
+        <h3>AM for PM smoke-day list</h3>
+        <p class="form-note" style="margin-top:0;">Get our tips on high-pollution and wildfire-smoke days, plus news as we launch our own alerts.</p>
+        <label for="al-email">Email</label>
+        <input id="al-email" type="email" required autocomplete="email" />
+        <label for="al-city">City</label>
+        <input id="al-city" required placeholder="e.g. Louisville, KY" />
+        <label for="al-level">Alert me when the air is...</label>
+        <select id="al-level">
+          <option>Moderate or worse</option>
+          <option selected>Unhealthy for Sensitive Groups or worse</option>
+          <option>Unhealthy or worse</option>
+        </select>
+        <button class="buy-btn" type="submit" style="margin-top:1.25rem;">Join the list</button>
+        <div class="form-status" id="alert-status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CLASSROOM DISPLAY LAUNCHER -->
+  <div class="panel" id="classroom-launch">
+    <span class="eyebrow">For schools</span>
+    <h2>Classroom AQI display</h2>
+    <p>
+      A full-screen air quality board for a classroom projector or hallway TV: today's AQI in big numbers, the color,
+      and whether recess can be outside. It updates itself every 30 minutes.
+    </p>
+    <div class="aq-row">
+      <input id="cr-city-input" placeholder="Your school's city" aria-label="School city" />
+      <button class="buy-btn" id="cr-launch"><i class="fa-solid fa-tv"></i> Launch display</button>
+    </div>
+    <div class="form-status" id="cr-launch-status" aria-live="polite"></div>
+    <p class="small-print" style="margin-top:1rem;">
+      Tip: after launching once, bookmark <strong>amforpm.org/#classroom</strong> on the classroom computer and it will open
+      straight to your school's display.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3>On a bad air day</h3>
+      <p>Move hard exercise indoors, keep windows closed, and run a HEPA air purifier if you have one. A well-fitted N95 mask filters fine particles; cloth masks do not.</p>
+    </div>
+    <div class="card">
+      <div class="icon amber"><i class="fa-solid fa-person-cane"></i></div>
+      <h3>Who is most at risk</h3>
+      <p>Children, older adults, pregnant people, and anyone with asthma, lung disease or heart disease should take action at lower levels.</p>
+    </div>
+    <div class="card">
+      <div class="icon"><i class="fa-solid fa-house-chimney"></i></div>
+      <h3>Indoor air counts too</h3>
+      <p>Cooking (especially frying), gas stoves, candles, incense and smoking all raise PM2.5 indoors. Use a range hood, or open a window when it's clean outside.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARTICULATE MATTER ================= -->
+<section id="pm">
+  <div class="section-head">
+    <span class="eyebrow">The basics</span>
+    <h2>Understanding Particulate Matter</h2>
+    <p class="lead">
+      Particulate matter is a mixture of solid particles and liquid droplets suspended in the air.
+      Made out of particles such as organic chemical compounds, soot, heavy metals, sulfates, nitrates, and acids,
+      PM2.5 and other PMs can dangerously alter our well-being and future lifestyles.
+    </p>
+    <p>Common size groups are PM10, PM2.5, and PM1.0. The number is the particle's width in micrometers (µm); one micrometer is a thousandth of a millimeter.</p>
+  </div>
+
+  <div class="image-grid">
+    <figure>
+      <img src="https://plus.unsplash.com/premium_photo-1664298311043-46b3814a511f?q=80&w=1200&auto=format&fit=crop" alt="Smoke rising from industrial smokestacks" />
+      <figcaption>Image: Unsplash</figcaption>
+    </figure>
+    <figure>
+      <img src="https://ww2.arb.ca.gov/sites/default/files/inline-images/human_hair_0.png" alt="Size comparison of PM2.5 and PM10 particles with a human hair" />
+      <figcaption>Image: <a href="https://ww2.arb.ca.gov/resources/inhalable-particulate-matter-and-health" target="_blank" rel="noopener">California Air Resources Board</a></figcaption>
+    </figure>
+    <figure>
+      <img src="https://cdn.prod.website-files.com/5f23e100544c90c140f34325/67ae01a18dcc4cec81f0325e_628f9da4b487bb6b620efd28_Artboard%25201%25404x-100.jpeg" alt="Illustration of particulate matter sizes" />
+      <figcaption>Image: <a href="https://atmotube.com/" target="_blank" rel="noopener">Atmotube</a></figcaption>
+    </figure>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fa-solid fa-industry"></i></div>
+      <h3>Sources</h3>
+      <p>Vehicles, power plants, factories, construction, agriculture, wildfires, and indoor sources like cooking and burning candles.</p>
+    </div>
+    <div class="card">
+      <div class="icon green"><i class="fa-solid fa-ruler"></i></div>
+      <h3>Sizes</h3>
+      <p><strong>PM10:</strong> coarse dust, pollen and mold. <strong>PM2.5:</strong> fine particles, about 30 times thinner than a human hair. <strong>Ultrafine:</strong> smaller than 0.1 µm.</p>
+    </div>
+    <div class="card">
+      <div class="icon red"><i class="fa-solid fa-lungs"></i></div>
+      <h3>Exposure</h3>
+      <p>The smaller the particle, the deeper it travels. PM10 mostly stops in the nose and throat; PM2.5 reaches the deepest parts of the lungs and can even enter the bloodstream.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <i class="fa-solid fa-arrow-right"></i>
+    <p><strong>Want the full story?</strong> Read our <a href="#pm25">PM2.5 Guide</a> for how fine particles form, travel through the body, and affect the environment.</p>
+  </div>
+</section>
+
+<!-- ================= PM2.5 GUIDE ================= -->
+<section id="pm25">
+  <div class="section-head">
+    <span class="eyebrow">The complete guide</span>
+    <h2>PM2.5: the invisible pollutant</h2>
+    <p class="lead">
+      PM2.5 is the name for airborne particles 2.5 micrometers wide or smaller. They are too small to see one by one,
+      small enough to slip past the body's defenses, and responsible for more health harm than any other air pollutant.
+    </p>
+  </div>
+
+  <div class="toc" aria-label="Jump to a topic">
+    <button data-scroll="g-what">What is it?</button>
+    <button data-scroll="g-sources">Where it comes from</button>
+    <button data-scroll="g-body">Into the body</button>
+    <button data-scroll="g-health">Health effects</button>
+    <button data-scroll="g-risk">Who's at risk</button>
+    <button data-scroll="g-env">Environment</button>
+    <button data-scroll="g-measure">How it's measured</button>
+    <button data-scroll="g-myths">Myths vs facts</button>
+    <button data-scroll="g-protect">Protect yourself</button>
+    <button data-scroll="g-glossary">Glossary</button>
+  </div>
+
+  <!-- 1. WHAT IS IT -->
+  <div class="topic" id="g-what">
+    <span class="eyebrow">1 · What is it?</span>
+    <h2>Smaller than you can imagine</h2>
+    <div class="readable">
+      <p>
+        The "2.5" means 2.5 micrometers (µm). A human hair is roughly 50 to 70 µm wide, so you could line up about
+        20 to 30 PM2.5 particles across the width of a single hair. Many are far smaller still.
+      </p>
+      <p>
+        One particle is invisible, but billions together create the gray-brown haze you see on smoggy or smoky days.
+        PM2.5 is not one chemical. It is a mix of soot (black carbon), dust, metals, sulfates, nitrates, ammonium, and organic
+        compounds, and the recipe changes from place to place and season to season.
+      </p>
+      <p>
+        Because they are so light, fine particles can stay in the air for days to weeks and ride the wind for hundreds or even
+        thousands of miles. That is how wildfire smoke from one region can turn the sky orange in another.
+      </p>
+    </div>
+
+    <div class="size-figure">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Size comparison: a human hair is about 70 micrometers wide, PM10 is 10 micrometers and PM2.5 is 2.5 micrometers">
+        <text x="20" y="30" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#0f2f5f">Drawn to scale: a human hair vs. particles</text>
+        <!-- hair cross-section: 70 um => diameter 210px (3px per um) -->
+        <circle cx="150" cy="170" r="105" fill="#f2d9b3" stroke="#b78b4d" stroke-width="2"/>
+        <text x="150" y="295" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1d2733">Human hair ≈ 70 µm</text>
+        <!-- PM10: 10 um => d 30px -->
+        <circle cx="400" cy="170" r="15" fill="#90caf9" stroke="#1e5aa8" stroke-width="2"/>
+        <text x="400" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1d2733">PM10 = 10 µm</text>
+        <text x="400" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#5b6776">dust, pollen, mold</text>
+        <!-- PM2.5: 2.5 um => d 7.5px -->
+        <circle cx="590" cy="170" r="3.75" fill="#e53935"/>
+        <circle cx="590" cy="170" r="22" fill="none" stroke="#e53935" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="590" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1d2733">PM2.5 = 2.5 µm</text>
+        <text x="590" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#5b6776">smoke, soot, exhaust</text>
+        <line x1="640" y1="30" x2="670" y2="30" stroke="#5b6776" stroke-width="2"/>
+        <text x="678" y="34" font-family="Inter, sans-serif" font-size="12" fill="#5b6776">= 10 µm</text>
+      </svg>
+    </div>
+
     <div class="image-grid">
-      <img
-        src="https://www.howardluksmd.com/wp-content/uploads/2021/11/AQi-PM-2.5-levels-health-effects.jpeg" alt="Person wearing mask in pollution"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?q=80&w=800&auto=format&fit=crop" alt="Smog and PM2.5 pollution"
-      />
-      <img
-        src="https://www.alohaz.com/cdn/shop/files/pm-25-filter-activated-carbon-face-mask-alohaz-2500043.webp?v=1754708305&width=1646" alt="Air quality monitoring"
-      />
+      <figure>
+        <img src="https://www.howardluksmd.com/wp-content/uploads/2021/11/AQi-PM-2.5-levels-health-effects.jpeg" alt="Chart of PM2.5 levels and their health effects" />
+        <figcaption>Image: howardluksmd.com</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?q=80&w=800&auto=format&fit=crop" alt="City skyline covered in smog" />
+        <figcaption>Image: Unsplash</figcaption>
+      </figure>
+      <figure>
+        <img src="https://www.alohaz.com/cdn/shop/files/pm-25-filter-activated-carbon-face-mask-alohaz-2500043.webp?v=1754708305&width=1646" alt="Face mask with a PM2.5 filter" />
+        <figcaption>Image: alohaz.com</figcaption>
+      </figure>
     </div>
+  </div>
 
+  <!-- 2. SOURCES -->
+  <div class="topic" id="g-sources">
+    <span class="eyebrow">2 · Where it comes from</span>
+    <h2>Made directly, and made in the air</h2>
+    <div class="grid two">
+      <div class="card">
+        <span class="tag">Primary PM2.5</span>
+        <h3>Released straight into the air</h3>
+        <p>Soot from diesel and gasoline engines, smoke from wildfires, wood stoves and burning trash, dust from construction and roads, and particles from cooking.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Secondary PM2.5</span>
+        <h3>Formed in the air from gases</h3>
+        <p>Gases like sulfur dioxide (from coal power plants), nitrogen oxides (from vehicles), ammonia (from farms) and volatile organic compounds react in sunlight and turn into new particles. In many places this is a large share of the PM2.5 people breathe.</p>
+      </div>
+    </div>
     <div class="grid">
       <div class="card">
-        <h3>Health Effects</h3><p>Linked to asthma, heart disease, and premature mortality.</p></div>
+        <div class="icon"><i class="fa-solid fa-car-side"></i></div>
+        <h3>Transportation</h3>
+        <p>Cars, trucks, buses, ships and planes. Levels are often highest near busy roads and idling vehicles, such as school pickup lines.</p>
+      </div>
       <div class="card">
-        <h3>Monitoring</h3><p>Measured through monitoring stations and satellites.</p></div>
+        <div class="icon purple"><i class="fa-solid fa-industry"></i></div>
+        <h3>Power and industry</h3>
+        <p>Power plants, factories, refineries and mining release particles and the gases that form them.</p>
+      </div>
       <div class="card">
-        <h3>Sources of Removal</h3><p>PM2.5 can be removed through various filters available online. The best filters contain carbon filters or HEPA filters.</p></div>
+        <div class="icon red"><i class="fa-solid fa-fire"></i></div>
+        <h3>Fires</h3>
+        <p>Wildfires, agricultural burning and home wood burning. Wildfire smoke is a growing share of PM2.5 in the U.S. as fire seasons get longer.</p>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-kitchen-set"></i></div>
+        <h3>Indoors</h3>
+        <p>Frying and searing food, gas stoves, candles, incense, fireplaces, vaping and smoking. Indoor levels can spike higher than outdoors.</p>
+      </div>
     </div>
-    <div class="grid">
-      <div class="card"><h3>Image Source</h3><p>www.howardluksmd.com</p>
-      </div>
-      <div class="card"><h3>Image Source</h3><p>images.unsplash.com</p>
-      </div>
-      <div class="card"><h3>Image Source</h3><p>www.alohaz.com</p>
-      </div>
-    </div>
-  </section>
+  </div>
 
-<section id="research">
-  <h2>Research & Data</h2>
-  <p>We translate peer-reviewed research into accessible educational content.</p>
-  <div class="grid">
-    <div class="card"><h3>Scientific Studies</h3><p>Summaries of current PM research.</p></div>
-    <div class="card"><h3>National Trends</h3><p>Air quality data and long-term trends.</p></div>
-    <div class="card"><h3>Policy Context</h3><p>Clear explanations of air quality standards.</p></div>
+  <!-- 3. INTO THE BODY -->
+  <div class="topic" id="g-body">
+    <span class="eyebrow">3 · The journey into your body</span>
+    <h2>Why size matters so much</h2>
+    <p class="readable">Your nose, throat and airways are good at trapping big particles. PM2.5 is small enough to get past almost all of those defenses.</p>
+    <div class="journey-stage">
+      <svg viewBox="0 0 800 420" role="img" aria-label="Animated journey of a PM2.5 particle from a car's exhaust, through the air, into a person's nose, lungs, blood and heart">
+        <!-- ground -->
+        <rect x="0" y="380" width="800" height="40" fill="#d8e6c9"/>
+        <!-- car -->
+        <g id="jp-car" class="body-part">
+          <path d="M40 350 L40 312 Q40 300 52 300 L80 300 L100 272 Q106 264 116 264 L168 264 Q178 264 184 272 L200 300 L208 300 Q220 300 220 312 L220 350 Z" fill="#90caf9" stroke="#1e5aa8" stroke-width="2"/>
+          <path d="M108 276 L170 276 L186 298 L94 298 Z" fill="#e3f2fd" stroke="#1e5aa8" stroke-width="1.5"/>
+          <circle cx="80" cy="355" r="18" fill="#37474f"/><circle cx="80" cy="355" r="7" fill="#b0bec5"/>
+          <circle cx="182" cy="355" r="18" fill="#37474f"/><circle cx="182" cy="355" r="7" fill="#b0bec5"/>
+          <rect x="220" y="336" width="18" height="8" rx="2" fill="#546e7a"/>
+          <circle cx="252" cy="334" r="9" fill="#9e9e9e" opacity="0.55"/>
+          <circle cx="270" cy="322" r="12" fill="#9e9e9e" opacity="0.4"/>
+          <circle cx="292" cy="306" r="15" fill="#9e9e9e" opacity="0.28"/>
+          <text x="130" y="404" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0f2f5f">Car exhaust</text>
+        </g>
+        <!-- air -->
+        <g id="jp-air" class="body-part">
+          <path d="M320 150 q20 -12 40 0 t40 0 t40 0" fill="none" stroke="#90caf9" stroke-width="3" stroke-linecap="round"/>
+          <path d="M340 190 q20 -12 40 0 t40 0 t40 0" fill="none" stroke="#90caf9" stroke-width="3" stroke-linecap="round"/>
+          <path d="M310 240 q20 -12 40 0 t40 0 t40 0" fill="none" stroke="#90caf9" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="335" cy="215" r="3" fill="#9e9e9e"/><circle cx="420" cy="170" r="2.5" fill="#9e9e9e"/>
+          <circle cx="455" cy="225" r="3" fill="#9e9e9e"/><circle cx="380" cy="265" r="2" fill="#9e9e9e"/>
+          <circle cx="470" cy="140" r="2" fill="#9e9e9e"/>
+          <text x="395" y="300" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0f2f5f">Air</text>
+        </g>
+        <!-- person -->
+        <g id="jp-person">
+          <rect x="560" y="150" width="160" height="230" rx="40" fill="#e3eefb" stroke="#1e5aa8" stroke-width="2"/>
+          <rect x="626" y="132" width="28" height="26" fill="#ffe0c2"/>
+          <circle cx="640" cy="88" r="50" fill="#ffe0c2" stroke="#c48b5a" stroke-width="2"/>
+          <path d="M688 92 q14 8 0 18" fill="#ffe0c2" stroke="#c48b5a" stroke-width="2"/>
+          <circle cx="662" cy="80" r="4" fill="#37474f"/>
+          <path d="M660 116 q10 6 18 0" fill="none" stroke="#c48b5a" stroke-width="2" stroke-linecap="round"/>
+          <!-- brain -->
+          <ellipse id="jp-brain" class="body-part" cx="628" cy="70" rx="30" ry="22" fill="#f8bbd0" stroke="#d81b60" stroke-width="1.5"/>
+          <!-- airway -->
+          <path id="jp-nose" class="body-part" d="M690 104 Q676 120 650 130 L640 170 L640 200" fill="none" stroke="#90a4ae" stroke-width="7" stroke-linecap="round"/>
+          <!-- lungs -->
+          <g id="jp-lungs" class="body-part">
+            <path d="M640 200 L612 215 M640 200 L668 215" stroke="#90a4ae" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="608" cy="245" rx="27" ry="50" fill="#f48fb1" opacity="0.85"/>
+            <ellipse cx="672" cy="245" rx="27" ry="50" fill="#f48fb1" opacity="0.85"/>
+          </g>
+          <!-- blood vessels -->
+          <path id="jp-blood" class="body-part" d="M620 280 C 606 330, 630 336, 640 326 M640 326 L640 160 C 640 140, 610 120, 618 92" fill="none" stroke="#e53935" stroke-width="3" stroke-dasharray="6 5"/>
+          <!-- heart -->
+          <path id="jp-heart" class="body-part" transform="translate(0 26)" d="M640 318 C 626 304, 612 296, 618 284 C 624 272, 638 276, 640 286 C 642 276, 656 272, 662 284 C 668 296, 654 304, 640 318 Z" fill="#e53935"/>
+          <text x="640" y="404" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#0f2f5f">You</text>
+        </g>
+        <!-- the particle -->
+        <g id="particle" transform="translate(240 340)">
+          <circle r="16" fill="none" stroke="#e53935" stroke-width="2" stroke-dasharray="4 4"/>
+          <circle r="7" fill="#e53935"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="journey-panel">
+      <div class="journey-text" aria-live="polite">
+        <span class="tag" id="jp-step">Step 1 of 6</span>
+        <h3 id="jp-title">It starts at a tailpipe</h3>
+        <p id="jp-desc"></p>
+      </div>
+      <div class="journey-controls">
+        <button class="buy-btn ghost" id="jp-prev" aria-label="Previous step"><i class="fa-solid fa-arrow-left"></i></button>
+        <div class="journey-dots" id="jp-dots"></div>
+        <button class="buy-btn ghost" id="jp-next" aria-label="Next step"><i class="fa-solid fa-arrow-right"></i></button>
+        <button class="buy-btn" id="jp-play"><i class="fa-solid fa-play"></i> Play</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. HEALTH EFFECTS -->
+  <div class="topic" id="g-health">
+    <span class="eyebrow">4 · Health effects</span>
+    <h2>From head to toe</h2>
+    <p class="readable">
+      Air pollution is the world's second-leading risk factor for early death, after high blood pressure, and it contributes to
+      about 1 in 4 heart disease deaths and over 1 in 4 dementia deaths worldwide
+      (<a href="https://www.stateofglobalair.org/" target="_blank" rel="noopener">State of Global Air 2025</a>).
+    </p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-lungs"></i></div>
+        <h3>Lungs</h3>
+        <p>Triggers asthma attacks and coughing, worsens COPD and bronchitis, reduces lung function, and raises the risk of lung cancer, even in people who have never smoked.</p>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3>Heart and blood vessels</h3>
+        <p>Linked to heart attacks, strokes, irregular heartbeat and high blood pressure. Heart disease is the largest single cause of PM2.5-related deaths.</p>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fa-solid fa-brain"></i></div>
+        <h3>Brain</h3>
+        <p>Long-term exposure is linked to dementia and cognitive decline in older adults, and researchers are studying effects on children's learning and attention.</p>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-baby"></i></div>
+        <h3>Pregnancy and babies</h3>
+        <p>Exposure during pregnancy is linked to preterm birth and low birth weight, which can affect a child's health for life.</p>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <span class="tag">Short-term (hours to days)</span>
+        <h3>On a smoky or smoggy day</h3>
+        <ul class="checks">
+          <li>Itchy eyes, sore throat, coughing</li>
+          <li>Asthma attacks and shortness of breath</li>
+          <li>More emergency room visits and hospital stays</li>
+          <li>Higher risk of heart attack and stroke in vulnerable people</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag">Long-term (months to years)</span>
+        <h3>Breathing polluted air year after year</h3>
+        <ul class="checks">
+          <li>Slower lung growth in children</li>
+          <li>Development of asthma and chronic lung disease</li>
+          <li>Heart disease, lung cancer and dementia</li>
+          <li>Shorter life expectancy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. WHO'S AT RISK -->
+  <div class="topic" id="g-risk">
+    <span class="eyebrow">5 · Who's most at risk</span>
+    <h2>Pollution doesn't affect everyone equally</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-child-reaching"></i></div>
+        <h3>Children and teens</h3>
+        <p>Their lungs are still growing, they breathe more air for their body size than adults, and they spend more time active outdoors.</p>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-person-cane"></i></div>
+        <h3>Older adults</h3>
+        <p>More likely to have heart or lung conditions that pollution makes worse.</p>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fa-solid fa-notes-medical"></i></div>
+        <h3>People with health conditions</h3>
+        <p>Asthma, COPD, heart disease and diabetes all raise the risk, as does pregnancy.</p>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fa-solid fa-city"></i></div>
+        <h3>Communities near pollution</h3>
+        <p>Neighborhoods beside highways, ports, factories and power plants often breathe the most pollution, and are often lower-income communities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. ENVIRONMENT -->
+  <div class="topic" id="g-env">
+    <span class="eyebrow">6 · Effects on the environment</span>
+    <h2>It harms the planet, too</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-smog"></i></div>
+        <h3>Haze</h3>
+        <p>Fine particles scatter and absorb light, blurring views in cities and in national parks.</p>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-water"></i></div>
+        <h3>Water and soil</h3>
+        <p>Particles settle onto land and water. Sulfates and nitrates can make lakes and streams more acidic, upset nutrient balance and strip nutrients from soil.</p>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-seedling"></i></div>
+        <h3>Plants and crops</h3>
+        <p>Dust and acid deposits can damage forests and farm crops and reduce how much sunlight reaches leaves.</p>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+        <h3>Climate and ice</h3>
+        <p>Black carbon (soot) absorbs sunlight and warms the air. When it lands on snow and glaciers, it darkens them so they melt faster.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <i class="fa-solid fa-rotate"></i>
+      <p><strong>A dangerous loop:</strong> a warming climate brings hotter, drier conditions and more wildfires, and wildfires release huge amounts of PM2.5 and soot, which add to warming.</p>
+    </div>
+  </div>
+
+  <!-- 7. MEASURED -->
+  <div class="topic" id="g-measure">
+    <span class="eyebrow">7 · How it's measured</span>
+    <h2>Reading the numbers</h2>
+    <div class="readable">
+      <p>
+        PM2.5 is measured in <strong>micrograms per cubic meter (µg/m³)</strong>: the weight of particles in a box of air
+        one meter on each side. Government monitors, satellites and low-cost sensors all measure it. To make the numbers easy to
+        understand, the U.S. turns them into the color-coded <strong>Air Quality Index (AQI)</strong>.
+      </p>
+    </div>
+
+    <h3 style="margin-top:2rem;">U.S. Air Quality Index for PM2.5 (24-hour average)</h3>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>AQI</th><th>Category</th><th>PM2.5 (µg/m³)</th><th>What to do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0–50</td><td><span class="swatch" style="background:#00e400"></span>Good</td><td>0 – 9.0</td><td>Enjoy being outside.</td></tr>
+          <tr><td>51–100</td><td><span class="swatch" style="background:#ffff00"></span>Moderate</td><td>9.1 – 35.4</td><td>Unusually sensitive people: consider less intense outdoor activity.</td></tr>
+          <tr><td>101–150</td><td><span class="swatch" style="background:#ff7e00"></span>Unhealthy for Sensitive Groups</td><td>35.5 – 55.4</td><td>Kids, older adults, people with asthma or heart disease: limit long or hard exercise outdoors.</td></tr>
+          <tr><td>151–200</td><td><span class="swatch" style="background:#ff0000"></span>Unhealthy</td><td>55.5 – 125.4</td><td>Everyone: cut back on outdoor activity. Sensitive groups: avoid it.</td></tr>
+          <tr><td>201–300</td><td><span class="swatch" style="background:#8f3f97"></span>Very Unhealthy</td><td>125.5 – 225.4</td><td>Everyone: avoid long outdoor activity. Sensitive groups stay indoors.</td></tr>
+          <tr><td>301+</td><td><span class="swatch" style="background:#7e0023"></span>Hazardous</td><td>225.5 and up</td><td>Everyone: stay indoors with filtered air if possible.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src" style="margin-top:0.75rem;">Breakpoints updated by the U.S. EPA in May 2024. Source: <a href="https://www.epa.gov/system/files/documents/2024-02/pm-naaqs-air-quality-index-fact-sheet.pdf" target="_blank" rel="noopener">EPA AQI fact sheet</a>.</p>
+
+    <h3 style="margin-top:2.5rem;">Air quality limits</h3>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Standard</th><th>Yearly average</th><th>24-hour average</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>World Health Organization guideline (2021)</td><td>5 µg/m³</td><td>15 µg/m³</td></tr>
+          <tr><td>U.S. EPA national standard</td><td>9.0 µg/m³</td><td>35 µg/m³</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src" style="margin-top:0.75rem;">
+      The EPA lowered its yearly standard from 12.0 to 9.0 µg/m³ in 2024; a federal appeals court upheld it in June 2026.
+      Sources: <a href="https://www.epa.gov/pm-pollution/final-reconsideration-national-ambient-air-quality-standards-particulate-matter-pm" target="_blank" rel="noopener">EPA</a>,
+      <a href="https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health" target="_blank" rel="noopener">WHO</a>.
+    </p>
+  </div>
+
+  <!-- 8. MYTHS -->
+  <div class="topic" id="g-myths">
+    <span class="eyebrow">8 · Myths vs facts</span>
+    <h2>Clearing the air</h2>
+    <div class="readable">
+      <details>
+        <summary><span><span class="myth">Myth:</span>If the sky looks clear, the air is clean.</span></summary>
+        <div class="answer"><span class="fact">Fact:</span>PM2.5 is invisible at moderate levels. The air can look perfectly clear and still be unhealthy. Check the AQI instead of the sky.</div>
+      </details>
+      <details>
+        <summary><span><span class="myth">Myth:</span>Staying indoors always protects you.</span></summary>
+        <div class="answer"><span class="fact">Fact:</span>Outdoor particles leak inside, and cooking, candles and gas stoves add more. Indoors is only safer if you keep windows closed and filter the air.</div>
+      </details>
+      <details>
+        <summary><span><span class="myth">Myth:</span>Any face mask will filter smoke.</span></summary>
+        <div class="answer"><span class="fact">Fact:</span>Cloth and surgical masks let most fine particles through. A well-fitted N95 or KN95 respirator filters most PM2.5.</div>
+      </details>
+      <details>
+        <summary><span><span class="myth">Myth:</span>Air pollution is only a big-city problem.</span></summary>
+        <div class="answer"><span class="fact">Fact:</span>Wildfire smoke, farm burning and wood stoves affect rural areas too, and smoke can travel thousands of miles.</div>
+      </details>
+      <details>
+        <summary><span><span class="myth">Myth:</span>Low levels of PM2.5 are perfectly safe.</span></summary>
+        <div class="answer"><span class="fact">Fact:</span>Scientists have not found a level with zero health risk. That is why the WHO lowered its guideline to 5 µg/m³ in 2021 and the EPA tightened its standard in 2024.</div>
+      </details>
+      <details>
+        <summary><span><span class="myth">Myth:</span>One person can't make a difference.</span></summary>
+        <div class="answer"><span class="fact">Fact:</span>Turning off an idling car, skipping a backyard burn, or teaching others to check the AQI all reduce exposure. Clean air rules, driven by public support, have cut U.S. particle pollution a lot since the 1970s.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- 9. PROTECT -->
+  <div class="topic" id="g-protect">
+    <span class="eyebrow">9 · Protect yourself</span>
+    <h2>Simple steps that work</h2>
+    <div class="grid two">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-shield-heart"></i></div>
+        <h3>Protect your health</h3>
+        <ul class="checks">
+          <li>Check the AQI each morning, especially before sports or recess</li>
+          <li>Move hard exercise indoors on orange, red or purple days</li>
+          <li>Wear a well-fitted N95 if you must be out in smoke</li>
+          <li>Run a HEPA air purifier in the room where you sleep</li>
+          <li>Use a range hood or open a window when cooking</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-leaf"></i></div>
+        <h3>Reduce pollution</h3>
+        <ul class="checks">
+          <li>Turn the engine off instead of idling</li>
+          <li>Walk, bike, carpool or take transit when you can</li>
+          <li>Skip burning leaves and trash</li>
+          <li>Choose electric tools and appliances where possible</li>
+          <li>Share what you learn: awareness is the first step</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+      <p><strong>DIY air purifier:</strong> a "Corsi-Rosenthal box" (four MERV-13 furnace filters taped to a box fan) is a low-cost way to clean the air in a room. Many schools have built them as a class project.</p>
+    </div>
+  </div>
+
+  <!-- 10. GLOSSARY -->
+  <div class="topic" id="g-glossary">
+    <span class="eyebrow">10 · Glossary</span>
+    <h2>Words to know</h2>
+    <div class="readable">
+      <details><summary>Micrometer (µm)</summary><div class="answer">One millionth of a meter, or one thousandth of a millimeter. PM2.5 particles are 2.5 µm or smaller.</div></details>
+      <details><summary>µg/m³</summary><div class="answer">Micrograms per cubic meter: the weight of particles in one cubic meter of air. This is how PM2.5 is measured.</div></details>
+      <details><summary>AQI (Air Quality Index)</summary><div class="answer">A color-coded 0–500 scale that turns pollution measurements into simple health advice. Higher numbers mean dirtier air.</div></details>
+      <details><summary>Alveoli</summary><div class="answer">Millions of tiny air sacs deep in the lungs where oxygen passes into the blood. PM2.5 can reach them.</div></details>
+      <details><summary>Black carbon</summary><div class="answer">The sooty part of PM2.5 from burning fuels and wood. It harms health and warms the climate.</div></details>
+      <details><summary>Secondary particles</summary><div class="answer">Particles that form in the air when gases like sulfur dioxide, nitrogen oxides and ammonia react.</div></details>
+      <details><summary>HEPA filter</summary><div class="answer">High-Efficiency Particulate Air filter. A true HEPA filter captures at least 99.97% of particles 0.3 µm in size.</div></details>
+      <details><summary>MERV rating</summary><div class="answer">A 1–16 scale for furnace and HVAC filters. MERV-13 or higher captures most fine particles.</div></details>
+      <details><summary>NAAQS</summary><div class="answer">National Ambient Air Quality Standards: the legal pollution limits the U.S. EPA sets under the Clean Air Act.</div></details>
+    </div>
   </div>
 </section>
 
-<section id="schools">
-  <h2>Education</h2>
-  <p>Curriculum-aligned materials for classrooms and educators as well as sessions to spread awareness and knowledge can be implemented
-    both in school and out of school.
+<!-- ================= QUIZ ================= -->
+<section id="quiz">
+  <div class="section-head">
+    <span class="eyebrow">Test yourself</span>
+    <h2>The PM2.5 Quiz</h2>
+    <p class="lead">Ten questions about the air you breathe. Every answer comes with an explanation, so you learn as you go.</p>
+  </div>
+  <div class="card quiz" id="quiz-box" aria-live="polite"></div>
+  <p class="small-print" style="text-align:center; margin-top:1.25rem;">
+    Teachers: project this quiz in class and have students vote on each answer.
+    All answers are explained in our <a href="#pm25">PM2.5 Guide</a>.
   </p>
-  <div class="grid">
-    <div class="card"><h3>Lesson Plans</h3><p>Ready-to-use educational resources such as childrens books and research books
-      to inspire all types of research, especially ones based on pollution and PM2.5. PM2.5 is a problem that needs to be looked
-      at more. At one point, if we don't care about this issue, there might not be any recovering.
-    </p></div>
-    <div class="card"><h3>Workshops</h3><p>Community-based talks and discussions can be hosted around a public area or 
-      as an after school extracurricular or program. Can involve all types of ages in school, from elementary to high school, 
-      and can 
-    </p></div>
 </section>
 
-<section id="resources">
-  <h2>Resources & Products</h2>
-  <p>All proceeds support clean air education nationwide.</p>
-  <div class="grid">
-    <div class="card">
-      <h3>AM for PM T-Shirt</h3>
-      <p>Ethically sourced cotton t-shirt.</p>
-      <div class="price">$25</div>
-      <button class="buy-btn" onclick="openTab('shop', this)">Buy Now</button>
+<!-- ================= KIDS' CORNER ================= -->
+<section id="kids">
+  <div class="kids-hero">
+    <svg viewBox="0 0 240 200" role="img" aria-label="Breezy the Clean Air Cloud, a smiling cartoon cloud">
+      <g>
+        <circle cx="70" cy="110" r="45" fill="#fff" stroke="#4FC3F7" stroke-width="5"/>
+        <circle cx="122" cy="82" r="58" fill="#fff" stroke="#4FC3F7" stroke-width="5"/>
+        <circle cx="178" cy="110" r="45" fill="#fff" stroke="#4FC3F7" stroke-width="5"/>
+        <rect x="70" y="105" width="108" height="50" fill="#fff"/>
+        <path d="M70 155 L178 155" stroke="#4FC3F7" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="70" cy="110" r="42" fill="#fff"/>
+        <circle cx="122" cy="82" r="55" fill="#fff"/>
+        <circle cx="178" cy="110" r="42" fill="#fff"/>
+        <circle cx="102" cy="100" r="9" fill="#0f2f5f"/>
+        <circle cx="146" cy="100" r="9" fill="#0f2f5f"/>
+        <circle cx="105" cy="97" r="3" fill="#fff"/>
+        <circle cx="149" cy="97" r="3" fill="#fff"/>
+        <path d="M104 124 Q124 142 144 124" fill="none" stroke="#0f2f5f" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="86" cy="120" r="8" fill="#ffb3c1"/>
+        <circle cx="162" cy="120" r="8" fill="#ffb3c1"/>
+        <path d="M30 180 q15 -10 30 0 t30 0" fill="none" stroke="#4FC3F7" stroke-width="4" stroke-linecap="round"/>
+        <path d="M150 185 q15 -10 30 0 t30 0" fill="none" stroke="#4FC3F7" stroke-width="4" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div>
+      <span class="eyebrow">Kids' Corner</span>
+      <h2>Hi! I'm Breezy, the Clean Air Cloud!</h2>
+      <p>I help kids learn about the air we breathe. Some bits of pollution are so tiny you can't see them, but together we can keep our air clean. Let's explore!</p>
+      <div class="btn-row">
+        <button class="buy-btn amber" data-scroll="kid-facts">Fun facts</button>
+        <button class="buy-btn" data-scroll="kid-game">Play a game</button>
+        <button class="buy-btn ghost" id="print-coloring"><i class="fa-solid fa-print"></i> Coloring page</button>
+      </div>
     </div>
-    <div class="card">
-      <h3>AM for PM Book</h3>
-      <p>Learn about the research journey taken to learn more about this particle</p>
-      <div class="price">$30</div>
-      <button class="buy-btn" onclick="openTab('shop', this)">Buy Now</button>
+  </div>
+
+  <div class="topic" id="kid-facts" style="margin-top:3rem;">
+    <span class="eyebrow">Did you know?</span>
+    <h2>Breezy's fun facts</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-ruler"></i></div>
+        <h3>Super tiny!</h3>
+        <p>About 30 PM2.5 particles could line up side by side across the width of one hair on your head.</p>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-wind"></i></div>
+        <h3>Lots of breaths</h3>
+        <p>You take about 20,000 breaths every day. That's why clean air matters so much!</p>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-traffic-light"></i></div>
+        <h3>Air has colors</h3>
+        <p>The Air Quality Index uses colors: green means great, yellow means okay, orange means be careful, and red or purple mean stay inside.</p>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fa-solid fa-fire"></i></div>
+        <h3>Smoke travels far</h3>
+        <p>Smoke from a wildfire can float thousands of miles and make the sky hazy in places far away.</p>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fa-solid fa-face-smile"></i></div>
+        <h3>Your nose is a filter</h3>
+        <p>Tiny hairs in your nose catch dust and pollen. But PM2.5 is so small it can sneak right past them.</p>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-car"></i></div>
+        <h3>You can help!</h3>
+        <p>Ask grown-ups to turn off the car while waiting at school pickup. It keeps the air cleaner for everyone.</p>
+      </div>
     </div>
+  </div>
+
+  <div class="topic" id="kid-game">
+    <span class="eyebrow">Game</span>
+    <h2>Clean air or dirty air?</h2>
+    <p>Does each thing help keep the air clean, or make it dirty? Tap your answer!</p>
+    <div class="sort-list" id="sort-list"></div>
+    <div class="sort-score" id="sort-score"></div>
+    <button class="buy-btn ghost" id="sort-reset" style="margin-top:1rem;"><i class="fa-solid fa-rotate"></i> Play again</button>
+  </div>
+
+  <div class="topic" id="kid-experiment">
+    <span class="eyebrow">Science experiment</span>
+    <h2>Be an Air Detective</h2>
+    <div class="grid two">
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-magnifying-glass"></i></div>
+        <h3>Make a particle catcher</h3>
+        <p><strong>You need:</strong> 3 white index cards, petroleum jelly, string or tape, a magnifying glass, and a grown-up helper.</p>
+        <ol class="steps-list">
+          <li>Spread a thin layer of petroleum jelly on one side of each card.</li>
+          <li>Hang the cards in 3 places: near a road, in a park, and inside your house.</li>
+          <li>Wait 3 days without touching them.</li>
+          <li>Look at each card with a magnifying glass. Which one caught the most specks?</li>
+        </ol>
+      </div>
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <h3>What did you find?</h3>
+        <p>The specks you can see are bigger particles like dust, pollen and soot. PM2.5 is too tiny to see, even with a magnifying glass. Scientists use special sensors to count them!</p>
+        <p><strong>Think about it:</strong> Which place was dirtiest? Why do you think so? Draw a picture of your cards and share it with your class.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <i class="fa-solid fa-print"></i>
+    <p><strong>Coloring page:</strong> print Breezy and color your own Clean Air Hero! <button class="buy-btn" id="print-coloring-2" style="margin-left:0.5rem;">Print it</button></p>
   </div>
 </section>
 
-<section id="shop">
-  <h2>Purchase & Registration</h2>
-  <p>Submit the form below. Order details will be emailed to the AM for PM team.</p>
-  <form id="orderForm">
-    <label>Full Name</label>
-    <input id="name" required />
-    <label>Email</label>
-    <input id="email" type="email" required />
-    <label>Product</label>
-    <select id="product">
-      <option>AM for PM T-Shirt — $25</option>
-      <option>AM for PM Book — $30</option>
+<!-- ================= AMBASSADORS ================= -->
+<section id="ambassadors">
+  <div class="section-head">
+    <span class="eyebrow">AM for PM Ambassadors</span>
+    <h2>Start a clean-air chapter at your school</h2>
+    <p class="lead">Ambassadors are students who bring PM2.5 awareness to their own school and community. We give you everything you need to start.</p>
+  </div>
+
+  <h3>Our chapters <span class="map-count" id="chapter-count"></span></h3>
+  <div class="map-wrap">
+    <div id="chapter-map" role="region" aria-label="Map of AM for PM chapters"></div>
+    <div class="map-note" id="map-note" hidden>No chapters yet. Your school could be the first pin!</div>
+  </div>
+
+  <div class="topic" style="margin-top:3.5rem;">
+    <span class="eyebrow">How it works</span>
+    <h2>Five steps to a chapter</h2>
+    <ol class="journey">
+      <li><h4>Apply</h4><p>Fill out the short form below. A teacher or parent sponsor is recommended.</p></li>
+      <li><h4>Get your kit</h4><p>We email you the starter kit: slides, activities, posters and social media graphics.</p></li>
+      <li><h4>Build your team</h4><p>Recruit a few friends and a teacher advisor. Start as a club or a project in an existing club.</p></li>
+      <li><h4>Hold your first event</h4><p>Run a workshop, set up a Classroom AQI display, or lead an anti-idling campaign at pickup.</p></li>
+      <li><h4>Share your impact</h4><p>Send us photos and numbers. Your chapter goes on the map!</p></li>
+    </ol>
+  </div>
+
+  <div class="topic">
+    <span class="eyebrow">Starter kit</span>
+    <h2>What's in the kit</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+        <h3>Presentation slides</h3>
+        <p>A 20-minute talk on PM2.5 with speaker notes, ready to present to a class or club.</p>
+      </div>
+      <div class="card">
+        <div class="icon green"><i class="fa-solid fa-flask"></i></div>
+        <h3>Hands-on activities</h3>
+        <p>The particle catcher experiment, the Daily Air Check graphing activity, and this site's quiz.</p>
+      </div>
+      <div class="card">
+        <div class="icon amber"><i class="fa-solid fa-image"></i></div>
+        <h3>Posters and flyers</h3>
+        <p>An AQI color poster for classrooms and a "Turn off your engine" flyer for pickup lines.</p>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fa-solid fa-hashtag"></i></div>
+        <h3>Social media kit</h3>
+        <p>Ready-made graphics and captions for your chapter's Instagram and TikTok.</p>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fa-solid fa-calendar-check"></i></div>
+        <h3>Event ideas</h3>
+        <p>Plans for Earth Day, Clean Air Week, science fairs and smoke-day awareness.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-tv"></i></div>
+        <h3>Classroom AQI display</h3>
+        <p>Set up our <a href="#classroom">full-screen air board</a> in your school's hallway or classrooms.</p>
+      </div>
+    </div>
+  </div>
+
+  <form id="ambForm">
+    <h3>Apply to start a chapter</h3>
+    <label for="amb-name">Your Name</label>
+    <input id="amb-name" required autocomplete="name" />
+    <label for="amb-email">Email</label>
+    <input id="amb-email" type="email" required autocomplete="email" />
+    <label for="amb-school">School</label>
+    <input id="amb-school" required />
+    <label for="amb-city">City and State</label>
+    <input id="amb-city" required placeholder="e.g. Louisville, KY" />
+    <label for="amb-grade">Grade</label>
+    <select id="amb-grade">
+      <option>Middle school (6–8)</option>
+      <option selected>High school (9–12)</option>
+      <option>College</option>
+      <option>Teacher / advisor</option>
     </select>
-    <label>Quantity</label>
-    <input id="quantity" type="number" min="1" value="1" />
-    <label>Shipping Address</label>
-    <input id="address" required />
-    <button class="buy-btn" type="submit" style="margin-top:1.5rem;">Submit Order</button>
+    <label for="amb-why">Why do you want to start a chapter? (optional)</label>
+    <textarea id="amb-why" rows="3"></textarea>
+    <button class="buy-btn" type="submit" style="margin-top:1.5rem;">Apply</button>
+    <div class="form-status" id="amb-status" aria-live="polite"></div>
+    <p class="form-note">Students under 13 should have a parent or teacher apply for them.</p>
   </form>
 </section>
 
+<!-- ================= RESEARCH & NEWS ================= -->
+<section id="research">
+  <div class="section-head">
+    <span class="eyebrow">Stay informed</span>
+    <h2>Research &amp; Current News</h2>
+    <p class="lead">
+      AM for PM is committed to translating scientific research into accessible
+      educational content while keeping our community informed about the latest
+      developments in air pollution, PM2.5, climate, and environmental health.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fa-solid fa-microscope"></i></div>
+      <h3>Scientific Studies</h3>
+      <p>We summarize peer-reviewed research into easy-to-understand explanations for students, educators, and communities.</p>
+    </div>
+    <div class="card">
+      <div class="icon green"><i class="fa-solid fa-chart-line"></i></div>
+      <h3>National Trends</h3>
+      <p>Explore long-term air quality trends, PM2.5 monitoring data, satellite observations, and environmental reports.</p>
+    </div>
+    <div class="card">
+      <div class="icon purple"><i class="fa-solid fa-scale-balanced"></i></div>
+      <h3>Air Quality Policy</h3>
+      <p>Learn how EPA regulations, environmental legislation, and public health recommendations help reduce pollution.</p>
+    </div>
+  </div>
+
+  <div class="topic" style="margin-top:4rem;">
+    <span class="eyebrow">Reports</span>
+    <h2>Key reports we follow</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>State of Global Air 2025</h3>
+        <p>Health Effects Institute and IHME. Air pollution was linked to 7.9 million deaths in 2023, including 4.9 million from outdoor PM2.5.</p>
+        <a class="news-link" href="https://www.stateofglobalair.org/" target="_blank" rel="noopener">Read the report →</a>
+      </div>
+      <div class="card">
+        <h3>State of the Air 2026</h3>
+        <p>American Lung Association. 44% of Americans, 152.3 million people, live in places with failing grades for ozone or particle pollution.</p>
+        <a class="news-link" href="https://www.lung.org/research/sota" target="_blank" rel="noopener">Read the report →</a>
+      </div>
+      <div class="card">
+        <h3>World Air Quality Report 2025</h3>
+        <p>IQAir. Only 14% of the world's cities met the WHO PM2.5 guideline in 2025, down from 17% in 2024, driven partly by wildfires.</p>
+        <a class="news-link" href="https://www.iqair.com/world-air-quality-report" target="_blank" rel="noopener">Read the report →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="topic" style="margin-top:4rem;">
+    <span class="eyebrow">Live feed</span>
+    <h2>Today's Pollution News</h2>
+    <p>The latest environmental news, updated automatically from around the world.</p>
+    <div id="news-container" class="grid">
+      <div class="card">
+        <h3>Loading latest news...</h3>
+        <p>Please wait while the newest pollution news is retrieved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="schools">
+  <div class="section-head">
+    <span class="eyebrow">For classrooms &amp; communities</span>
+    <h2>Education</h2>
+    <p class="lead">
+      Curriculum-aligned materials for classrooms and educators, as well as sessions to spread awareness and knowledge,
+      can be used both in school and out of school.
+    </p>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fa-solid fa-book"></i></div>
+      <h3>Lesson Plans</h3>
+      <p>
+        Ready-to-use educational resources, such as children's books and research books, to inspire all types of research,
+        especially research on pollution and PM2.5. PM2.5 is a problem that needs more attention: if we ignore it for too long,
+        the damage to our health and environment becomes much harder to undo.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon green"><i class="fa-solid fa-people-group"></i></div>
+      <h3>Workshops</h3>
+      <p>
+        Community-based talks and discussions can be hosted in a public space or as an after-school extracurricular or program.
+        Workshops can involve students of all ages, from elementary to high school, and are tailored to each age group with
+        hands-on activities like measuring the air quality in your own classroom.
+      </p>
+      <button class="buy-btn" data-goto="involved">Request a free workshop</button>
+    </div>
+    <div class="card">
+      <div class="icon amber"><i class="fa-solid fa-chart-column"></i></div>
+      <h3>Classroom Activity: Daily Air Check</h3>
+      <p>
+        Start class by checking the day's air quality with our <a href="#air">Check Your Air</a> tool. Students record the AQI
+        for a month, graph it, and look for patterns with weather, traffic, and wildfire smoke.
+      </p>
+    </div>
+    <div class="card">
+      <div class="icon purple"><i class="fa-solid fa-tv"></i></div>
+      <h3>Classroom AQI Display</h3>
+      <p>Turn any projector or hallway TV into a live air quality board with a clear "recess inside or outside" message.</p>
+      <button class="buy-btn" data-goto="air" data-then="classroom-launch">Set it up</button>
+    </div>
+    <div class="card">
+      <div class="icon red"><i class="fa-solid fa-circle-question"></i></div>
+      <h3>PM2.5 Quiz</h3>
+      <p>A 10-question quiz with explanations. Great as a lesson opener or exit ticket.</p>
+      <button class="buy-btn" data-goto="quiz">Open the quiz</button>
+    </div>
+    <div class="card">
+      <div class="icon green"><i class="fa-solid fa-child-reaching"></i></div>
+      <h3>For Younger Students</h3>
+      <p>Kids' Corner has fun facts, a sorting game, a particle-catcher experiment and a printable coloring page.</p>
+      <button class="buy-btn" data-goto="kids">Visit Kids' Corner</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOP ================= -->
+<section id="shop">
+  <div class="section-head">
+    <span class="eyebrow">Support the mission</span>
+    <h2>Shop</h2>
+    <p class="lead">All proceeds support clean air education nationwide.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fa-solid fa-shirt"></i></div>
+      <h3>AM for PM T-Shirt</h3>
+      <p>Ethically sourced cotton t-shirt.</p>
+      <div class="price">$25</div>
+      <button class="buy-btn" data-product="AM for PM T-Shirt — $25">Order Now</button>
+    </div>
+    <div class="card">
+      <div class="icon green"><i class="fa-solid fa-book-open"></i></div>
+      <h3>AM for PM Book</h3>
+      <p>Follow the research journey taken to learn more about this particle.</p>
+      <div class="price">$30</div>
+      <button class="buy-btn" data-product="AM for PM Book — $30">Order Now</button>
+    </div>
+  </div>
+
+  <form id="orderForm">
+    <h3>Order Form</h3>
+    <p class="form-note" style="margin-top:0;">
+      Submit this form and the AM for PM team will email you to confirm your order, shipping cost, and payment.
+      You won't be charged now.
+    </p>
+    <label for="order-name">Full Name</label>
+    <input id="order-name" required autocomplete="name" />
+    <label for="order-email">Email</label>
+    <input id="order-email" type="email" required autocomplete="email" />
+    <label for="order-product">Product</label>
+    <select id="order-product">
+      <option>AM for PM T-Shirt — $25</option>
+      <option>AM for PM Book — $30</option>
+    </select>
+    <label for="order-quantity">Quantity</label>
+    <input id="order-quantity" type="number" min="1" value="1" />
+    <label for="order-address">Shipping Address</label>
+    <input id="order-address" required autocomplete="street-address" />
+    <button class="buy-btn" type="submit" style="margin-top:1.5rem;">Submit Order</button>
+    <div class="form-status" id="order-status" aria-live="polite"></div>
+    <p class="form-note">
+      <strong>Privacy:</strong> we use your name, email, and address only to fulfill your order. We never sell or share your information.
+      Orders ship within the U.S. If something is wrong with your order, contact us within 30 days.
+    </p>
+  </form>
+</section>
+
+<!-- ================= GET INVOLVED ================= -->
+<section id="involved">
+  <div class="section-head">
+    <span class="eyebrow">Join us</span>
+    <h2>Get Involved</h2>
+    <p class="lead">Teachers, students, parents, journalists, and organizations: we'd love to hear from you.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+      <h3>Request a workshop</h3>
+      <p>Free clean-air workshops for classrooms, clubs, libraries, and community groups.</p>
+    </div>
+    <div class="card">
+      <div class="icon green"><i class="fa-solid fa-user-group"></i></div>
+      <h3>Become an ambassador</h3>
+      <p>Start an AM for PM chapter at your school. We'll share slides, activities, and ideas to get you started.</p>
+    </div>
+    <div class="card">
+      <div class="icon amber"><i class="fa-solid fa-envelope-open-text"></i></div>
+      <h3>Join the newsletter</h3>
+      <p>A short monthly clean-air update with new research, tips, and classroom activities.</p>
+    </div>
+  </div>
+
+  <form id="contactForm">
+    <h3>Contact AM for PM</h3>
+    <label for="c-name">Your Name</label>
+    <input id="c-name" required autocomplete="name" />
+    <label for="c-email">Email</label>
+    <input id="c-email" type="email" required autocomplete="email" />
+    <label for="c-role">I am a...</label>
+    <select id="c-role">
+      <option>Teacher</option>
+      <option>Parent</option>
+      <option>Student</option>
+      <option>Journalist</option>
+      <option>Organization</option>
+      <option>Other</option>
+    </select>
+    <label for="c-topic">I'm interested in...</label>
+    <select id="c-topic">
+      <option>Requesting a workshop</option>
+      <option>Becoming an ambassador</option>
+      <option>Joining the newsletter</option>
+      <option>Media / interview</option>
+      <option>Partnering</option>
+      <option>Something else</option>
+    </select>
+    <label for="c-message">Message (optional)</label>
+    <textarea id="c-message" rows="4"></textarea>
+    <button class="buy-btn" type="submit" style="margin-top:1.5rem;">Send</button>
+    <div class="form-status" id="contact-status" aria-live="polite"></div>
+    <p class="form-note">Students under 13: please ask a parent or teacher to send this form for you.</p>
+  </form>
+</section>
+
+</main>
+
 <footer>
-  © 2026 AM for PM | Advancing Clean Air Through Education and Awareness
+  <div style="font-family: var(--heading); font-size: 1.4rem; font-weight: 700;">AM for PM</div>
+  <div>Advancing Clean Air Through Education and Awareness</div>
+  <div class="footer-links">
+    <button data-goto="air">Check Your Air</button>
+    <button data-goto="pm25">PM2.5 Guide</button>
+    <button data-goto="quiz">Quiz</button>
+    <button data-goto="kids">Kids' Corner</button>
+    <button data-goto="schools">Education</button>
+    <button data-goto="ambassadors">Ambassadors</button>
+    <button data-goto="shop">Shop</button>
+    <button data-goto="involved">Contact</button>
+  </div>
+  <div class="socials" id="socials"></div>
+  <div id="footer-email"></div>
+  <p class="footer-small">
+    AM for PM is a student-led initiative. Content is for education and is not medical advice.
+    Air quality data on this site is provided by Open-Meteo (CC BY 4.0).
+  </p>
+  <p class="footer-small">© <span id="year">2026</span> AM for PM</p>
 </footer>
+
+<div id="classroom" role="dialog" aria-modal="true" aria-label="Classroom air quality display">
+  <div class="cr-top">
+    <span id="cr-place">—</span>
+    <span id="cr-clock"></span>
+  </div>
+  <div class="cr-label">Air Quality Index · PM2.5</div>
+  <div class="cr-aqi" id="cr-aqi">--</div>
+  <div class="cr-cat" id="cr-cat">Loading...</div>
+  <div class="cr-recess" id="cr-recess">Checking the air...</div>
+  <div class="cr-tip" id="cr-tip"></div>
+  <div class="cr-bottom">
+    <span><span id="cr-updated"></span> · AM for PM · amforpm.org · Follow your school's own air quality policy.</span>
+    <span>
+      <button id="cr-full"><i class="fa-solid fa-expand"></i> Full screen</button>
+      <button id="cr-close"><i class="fa-solid fa-xmark"></i> Close</button>
+    </span>
+  </div>
+</div>
+
+<button id="to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-  function openTab(tabId, btn) {
-    document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    document.querySelectorAll('nav button').forEach(button => button.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-  }
+/* =========================================================
+   SETTINGS — edit these, nothing else needs to change
+   ========================================================= */
+const CONFIG = {
+  // EmailJS (already set up for orders)
+  emailjsPublicKey: 'hB1B_wlrMYhoq88P6',
+  emailjsService: 'service_imuassu',
+  orderTemplate: 'template_ossz99f',
 
-  emailjs.init('hB1B_wlrMYhoq88P6');
+  // TODO: in EmailJS, create a second template for messages with the variables
+  // {{name}} {{email}} {{role}} {{topic}} {{message}}, then paste its ID here.
+  // It is used by the contact form, the alert sign-up and the ambassador application.
+  // Until then, those forms open the visitor's email app instead.
+  contactTemplate: '',
 
-  document.getElementById('orderForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+  // TODO: the email address people can reach you at (shown in the footer).
+  contactEmail: '',
 
-    emailjs.send('service_imuassu', 'template_ossz99f', {
-      name: name.value,
-      email: email.value,
-      product: product.value,
-      quantity: quantity.value,
-      address: address.value
-    }).then(() => {
-      alert('Order submitted successfully!');
-      this.reset();
-    }).catch(() => {
-      alert('Error submitting order. Please try again.');
-    });
+  // TODO: paste full links once accounts exist; empty ones are hidden.
+  instagram: '',
+  tiktok: '',
+  youtube: '',
+  linkedin: '',
+
+  // TheNewsAPI key. Anything in this file is visible to visitors, so treat it as public.
+  newsApiKey: 'zJMgsNaw6gxa6uXjT5lyx0clgj3UwBb0aVS563HR',
+
+  // AMBASSADOR CHAPTERS — add one line per chapter to put it on the map.
+  // Find lat/lng by right-clicking the school in Google Maps and clicking the numbers.
+  // Example:
+  // { school: 'Example High School', city: 'Louisville, KY', lat: 38.2527, lng: -85.7585, since: '2026' },
+  chapters: [
+  ]
+};
+
+/* ---------- small helpers ---------- */
+const $ = id => document.getElementById(id);
+function el(tag, props, children) {
+  const node = document.createElement(tag);
+  if (props) Object.keys(props).forEach(k => {
+    if (k === 'style') node.style.cssText = props[k];
+    else if (k === 'text') node.textContent = props[k];
+    else node[k] = props[k];
   });
+  (children || []).forEach(c => node.append(c));
+  return node;
+}
+function store(key, value) {
+  try {
+    if (value === undefined) return JSON.parse(localStorage.getItem(key));
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) { return null; }
+}
+
+/* =========================================================
+   TABS (shareable links like amforpm.org/#quiz)
+   ========================================================= */
+const TAB_IDS = ['home', 'air', 'pm', 'pm25', 'quiz', 'kids', 'schools', 'ambassadors', 'research', 'shop', 'involved'];
+const ALIASES = { resources: 'shop', education: 'schools', contact: 'involved', news: 'research', guide: 'pm25', ambassador: 'ambassadors', chapters: 'ambassadors' };
+const TAB_HOOKS = {
+  research: () => loadNews(),
+  ambassadors: () => initMap()
+};
+
+function openTab(tabId, scroll) {
+  if (tabId === 'classroom') { openTab('air', false); openClassroom(); return; }
+  tabId = ALIASES[tabId] || tabId;
+  if (!TAB_IDS.includes(tabId)) tabId = 'home';
+
+  document.querySelectorAll('main section').forEach(s => s.classList.toggle('active', s.id === tabId));
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+
+  if (TAB_HOOKS[tabId]) TAB_HOOKS[tabId]();
+  if (scroll) document.querySelector('nav').scrollIntoView({ behavior: 'smooth' });
+}
+
+function goTo(tabId, thenId) {
+  if (location.hash === '#' + tabId) openTab(tabId, !thenId);
+  else { pendingScroll = thenId; location.hash = tabId; }
+  if (thenId && location.hash === '#' + tabId) scrollToId(thenId);
+}
+
+let pendingScroll = null;
+function scrollToId(id) {
+  setTimeout(() => { const t = $(id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
+}
+
+window.addEventListener('hashchange', () => {
+  const id = location.hash.slice(1);
+  openTab(id, !pendingScroll);
+  if (pendingScroll) { scrollToId(pendingScroll); pendingScroll = null; }
+});
+
+document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => goTo(b.dataset.tab)));
+document.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => goTo(b.dataset.goto, b.dataset.then)));
+document.querySelectorAll('[data-scroll]').forEach(b => b.addEventListener('click', () => scrollToId(b.dataset.scroll)));
+
+/* ---------- footer: email, social links, year ---------- */
+$('year').textContent = new Date().getFullYear();
+if (CONFIG.contactEmail) {
+  $('footer-email').append(el('a', { href: 'mailto:' + CONFIG.contactEmail, text: CONFIG.contactEmail }));
+}
+[['instagram', 'fa-instagram', 'Instagram'], ['tiktok', 'fa-tiktok', 'TikTok'],
+ ['youtube', 'fa-youtube', 'YouTube'], ['linkedin', 'fa-linkedin', 'LinkedIn']].forEach(([key, icon, label]) => {
+  if (!CONFIG[key]) return;
+  const a = el('a', { href: CONFIG[key], target: '_blank', rel: 'noopener' });
+  a.setAttribute('aria-label', label);
+  a.innerHTML = '<i class="fa-brands ' + icon + '"></i>';
+  $('socials').append(a);
+});
+
+/* =========================================================
+   EMAIL (EmailJS)
+   ========================================================= */
+let emailReady = false;
+try { emailjs.init(CONFIG.emailjsPublicKey); emailReady = true; }
+catch (e) { console.error('EmailJS did not load', e); }
+
+function setStatus(node, text, kind) {
+  node.style.color = kind === 'ok' ? '#1B5E20' : kind === 'err' ? '#b00020' : '#333';
+  node.textContent = text;
+}
+
+// Sends a message through the contact template, or falls back to the visitor's email app.
+function sendMessage(form, statusNode, data, successText) {
+  if (!CONFIG.contactTemplate || !emailReady) {
+    if (CONFIG.contactEmail) {
+      const body = `Name: ${data.name}\nEmail: ${data.email}\nI am a: ${data.role}\n\n${data.message}`;
+      location.href = 'mailto:' + CONFIG.contactEmail +
+        '?subject=' + encodeURIComponent('AM for PM: ' + data.topic) +
+        '&body=' + encodeURIComponent(body);
+    } else {
+      setStatus(statusNode, 'This form is being set up. Please check back soon.', 'err');
+    }
+    return;
+  }
+  const button = form.querySelector('button[type="submit"]');
+  button.disabled = true;
+  setStatus(statusNode, 'Sending...');
+  emailjs.send(CONFIG.emailjsService, CONFIG.contactTemplate, data)
+    .then(() => { setStatus(statusNode, successText, 'ok'); form.reset(); })
+    .catch(() => setStatus(statusNode, 'Something went wrong. Please try again.', 'err'))
+    .finally(() => { button.disabled = false; });
+}
+
+/* ---------- shop ---------- */
+document.querySelectorAll('[data-product]').forEach(btn => btn.addEventListener('click', () => {
+  $('order-product').value = btn.dataset.product;
+  $('orderForm').scrollIntoView({ behavior: 'smooth' });
+  $('order-name').focus({ preventScroll: true });
+}));
+
+$('orderForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const form = this, status = $('order-status'), button = form.querySelector('button[type="submit"]');
+  if (!emailReady) { setStatus(status, 'Ordering is unavailable right now. Please try again later.', 'err'); return; }
+  button.disabled = true;
+  setStatus(status, 'Sending your order...');
+  emailjs.send(CONFIG.emailjsService, CONFIG.orderTemplate, {
+    name: $('order-name').value,
+    email: $('order-email').value,
+    product: $('order-product').value,
+    quantity: $('order-quantity').value,
+    address: $('order-address').value
+  }).then(() => {
+    setStatus(status, 'Thank you! Your order was received. We will email you to confirm payment and shipping.', 'ok');
+    form.reset();
+  }).catch(() => setStatus(status, 'Something went wrong sending your order. Please try again.', 'err'))
+    .finally(() => { button.disabled = false; });
+});
+
+/* ---------- contact, alerts, ambassadors ---------- */
+$('contactForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  sendMessage(this, $('contact-status'), {
+    name: $('c-name').value, email: $('c-email').value, role: $('c-role').value,
+    topic: $('c-topic').value, message: $('c-message').value
+  }, 'Thank you! We will get back to you soon.');
+});
+
+$('alertForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  sendMessage(this, $('alert-status'), {
+    name: '(alert sign-up)', email: $('al-email').value, role: 'Alert subscriber',
+    topic: 'Air alert sign-up',
+    message: `City: ${$('al-city').value}\nAlert level: ${$('al-level').value}`
+  }, "You're on the list! For official daily alerts now, also sign up for EnviroFlash.");
+});
+
+$('ambForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  sendMessage(this, $('amb-status'), {
+    name: $('amb-name').value, email: $('amb-email').value, role: $('amb-grade').value,
+    topic: 'Ambassador application',
+    message: `School: ${$('amb-school').value}\nCity: ${$('amb-city').value}\n\n${$('amb-why').value}`
+  }, "Application sent! We'll email you the starter kit soon.");
+});
+
+/* =========================================================
+   AIR QUALITY DATA (Open-Meteo, free, no key)
+   ========================================================= */
+const LEVELS = [
+  { max: 50, name: 'Good', color: '#00e400', text: '#000',
+    tip: 'Air quality is good. A great day to be outside!',
+    recess: 'Recess: outside ✓', crTip: 'Great day to play outside!' },
+  { max: 100, name: 'Moderate', color: '#ffff00', text: '#000',
+    tip: 'Acceptable for most people. Unusually sensitive people should consider shortening long or intense outdoor activity.',
+    recess: 'Recess: outside ✓', crTip: 'Students who are unusually sensitive to air pollution can take it easier.' },
+  { max: 150, name: 'Unhealthy for Sensitive Groups', color: '#ff7e00', text: '#000',
+    tip: 'Children, older adults, and people with asthma or heart disease should limit long or intense outdoor activity.',
+    recess: 'Recess: outside, take it easy', crTip: 'Students with asthma or heart conditions: stay in or keep activity light. Keep inhalers handy.' },
+  { max: 200, name: 'Unhealthy', color: '#ff0000', text: '#fff',
+    tip: 'Everyone should reduce long or intense outdoor activity. Keep windows closed and run an air purifier if you have one.',
+    recess: 'Recess: INDOORS', crTip: 'Move physical activity indoors. Keep windows and doors closed.' },
+  { max: 300, name: 'Very Unhealthy', color: '#8f3f97', text: '#fff',
+    tip: 'Avoid long or intense outdoor activity. Sensitive groups should stay indoors.',
+    recess: 'Recess: INDOORS', crTip: 'Everyone stays indoors. Keep windows and doors closed.' },
+  { max: Infinity, name: 'Hazardous', color: '#7e0023', text: '#fff',
+    tip: 'Everyone should avoid outdoor activity and stay indoors with clean air if possible.',
+    recess: 'Recess: INDOORS', crTip: 'Health alert: everyone stays indoors with filtered air if possible.' }
+];
+const levelFor = aqi => LEVELS.find(l => aqi <= l.max);
+
+function geocode(q) {
+  return fetch('https://geocoding-api.open-meteo.com/v1/search?count=1&language=en&name=' + encodeURIComponent(q))
+    .then(r => r.json())
+    .then(g => {
+      if (!g.results || !g.results.length) throw new Error('notfound');
+      const p = g.results[0];
+      return { lat: p.latitude, lon: p.longitude, label: [p.name, p.admin1, p.country].filter(Boolean).join(', ') };
+    });
+}
+
+function fetchAir(lat, lon) {
+  const url = 'https://air-quality-api.open-meteo.com/v1/air-quality?latitude=' + lat + '&longitude=' + lon +
+    '&current=pm2_5,us_aqi_pm2_5&hourly=pm2_5,us_aqi_pm2_5&forecast_days=5&timezone=auto';
+  return fetch(url)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => {
+      const pm = d.current && d.current.pm2_5;
+      const aqi = d.current && d.current.us_aqi_pm2_5;
+      if (pm == null || aqi == null) throw new Error('nodata');
+      return { pm, aqi, hourly: d.hourly };
+    });
+}
+
+/* ---------- Check Your Air widget ---------- */
+const out = $('aq-out');
+let lastReading = null;
+
+function aqMessage(text) { out.replaceChildren(el('p', { text })); }
+
+function showAir(place) {
+  aqMessage('Loading air quality...');
+  fetchAir(place.lat, place.lon)
+    .then(data => renderResult(place, data))
+    .catch(() => aqMessage('Could not load air quality data for this place. Please try again in a moment.'));
+}
+
+function renderResult(place, data) {
+  const lv = levelFor(data.aqi);
+  lastReading = { label: place.label, pm: data.pm, aqi: data.aqi, level: lv };
+
+  const reading = el('p');
+  reading.append('PM2.5 right now: ', el('strong', {
+    text: data.pm.toFixed(1) + ' µg/m³' + (data.pm > 5
+      ? ' (about ' + (data.pm / 5).toFixed(1) + '× the WHO yearly guideline of 5 µg/m³)'
+      : ' (below the WHO yearly guideline of 5 µg/m³)')
+  }));
+
+  const shareStatus = el('span', { className: 'share-status' });
+  const shareBtn = el('button', { className: 'buy-btn amber' });
+  shareBtn.innerHTML = '<i class="fa-solid fa-share-nodes"></i> Share my air';
+  shareBtn.addEventListener('click', () => shareAir(shareStatus));
+  const calcBtn = el('button', { className: 'buy-btn ghost' });
+  calcBtn.innerHTML = '<i class="fa-solid fa-calculator"></i> My exposure today';
+  calcBtn.addEventListener('click', () => { runCalc(); scrollToId('calc'); });
+
+  const box = el('div', { className: 'aq-result' }, [
+    el('div', { className: 'aq-place', text: place.label }),
+    el('div', { className: 'aq-badge', text: 'PM2.5 AQI ' + Math.round(data.aqi) + ' · ' + lv.name,
+      style: `background:${lv.color};color:${lv.text}` }),
+    reading,
+    el('p', { text: lv.tip }),
+    renderForecast(data.hourly),
+    el('div', { className: 'btn-row' }, [shareBtn, calcBtn, shareStatus])
+  ]);
+  out.replaceChildren(box);
+
+  // fill the exposure calculator with this reading
+  $('calc-pm').value = data.pm.toFixed(1);
+}
+
+/* ---------- 5-day forecast chart ---------- */
+function renderForecast(hourly) {
+  const wrap = el('div', { className: 'forecast' });
+  if (!hourly || !hourly.time) return wrap;
+
+  const days = [];
+  hourly.time.forEach((t, i) => {
+    const day = t.slice(0, 10), aqi = hourly.us_aqi_pm2_5[i], pm = hourly.pm2_5[i];
+    if (aqi == null || pm == null) return;
+    let d = days.find(x => x.day === day);
+    if (!d) { d = { day, max: 0, pmSum: 0, n: 0 }; days.push(d); }
+    d.max = Math.max(d.max, aqi); d.pmSum += pm; d.n++;
+  });
+  const five = days.slice(0, 5);
+  if (!five.length) return wrap;
+
+  wrap.append(el('h4', { text: '5-day PM2.5 forecast' }),
+    el('div', { className: 'small-print', text: 'Bars show the highest hourly AQI expected each day; the number below is the day\'s average PM2.5.' }));
+
+  const W = 640, H = 270, left = 40, base = 200, top = 24;
+  const yMax = Math.max(100, Math.ceil(Math.max(...five.map(d => d.max)) / 50) * 50);
+  const y = v => base - (v / yMax) * (base - top);
+  const slot = (W - left - 10) / five.length, bw = Math.min(70, slot * 0.55);
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', '5-day PM2.5 forecast: ' + five.map((d, i) =>
+    `${i === 0 ? 'today' : dayName(d.day)} AQI ${Math.round(d.max)} ${levelFor(d.max).name}`).join(', '));
+  const add = (tag, attrs, text) => {
+    const n = document.createElementNS(NS, tag);
+    Object.keys(attrs).forEach(k => n.setAttribute(k, attrs[k]));
+    if (text != null) n.textContent = text;
+    svg.appendChild(n); return n;
+  };
+  const font = 'Inter, system-ui, sans-serif';
+
+  for (let v = 50; v <= yMax; v += 50) {
+    add('line', { x1: left, x2: W - 10, y1: y(v), y2: y(v), stroke: '#dbe4ef', 'stroke-dasharray': '3 4' });
+    add('text', { x: left - 8, y: y(v) + 4, 'text-anchor': 'end', 'font-size': 11, 'font-family': font, fill: '#5b6776' }, v);
+  }
+  add('line', { x1: left, x2: W - 10, y1: base, y2: base, stroke: '#9aa7b6' });
+
+  five.forEach((d, i) => {
+    const lv = levelFor(d.max), cx = left + slot * i + slot / 2;
+    add('rect', { x: cx - bw / 2, y: y(d.max), width: bw, height: Math.max(2, base - y(d.max)), rx: 6,
+      fill: lv.color, stroke: 'rgba(0,0,0,0.15)' });
+    add('text', { x: cx, y: y(d.max) - 7, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 700,
+      'font-family': font, fill: '#0f2f5f' }, Math.round(d.max));
+    add('text', { x: cx, y: base + 20, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 600,
+      'font-family': font, fill: '#1d2733' }, i === 0 ? 'Today' : dayName(d.day));
+    add('text', { x: cx, y: base + 38, 'text-anchor': 'middle', 'font-size': 11.5,
+      'font-family': font, fill: '#5b6776' }, (d.pmSum / d.n).toFixed(1) + ' µg/m³');
+    add('text', { x: cx, y: base + 55, 'text-anchor': 'middle', 'font-size': 11,
+      'font-family': font, fill: '#5b6776' }, shortName(lv.name));
+  });
+  wrap.append(svg);
+  return wrap;
+}
+function dayName(iso) { return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short' }); }
+function shortName(n) { return n === 'Unhealthy for Sensitive Groups' ? 'Sensitive groups' : n; }
+
+/* ---------- "Share my air" image ---------- */
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+
+async function shareAir(statusNode) {
+  if (!lastReading) return;
+  const { label, pm, aqi, level } = lastReading;
+  try { await document.fonts.ready; } catch (e) {}
+
+  const c = document.createElement('canvas');
+  c.width = 1080; c.height = 1080;
+  const ctx = c.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, 1080, 1080);
+  g.addColorStop(0, '#1B5E20'); g.addColorStop(0.5, '#2e7d62'); g.addColorStop(1, '#4FC3F7');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 1080);
+
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, 80, 80, 920, 920, 48); ctx.fill();
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#5b6776';
+  ctx.font = '600 40px Inter, Arial, sans-serif';
+  ctx.fillText("Today's air in", 540, 190);
+
+  ctx.fillStyle = '#0f2f5f';
+  let size = 64;
+  const place = label.length > 40 ? label.slice(0, 38) + '…' : label;
+  do { ctx.font = `700 ${size}px Fraunces, Georgia, serif`; size -= 2; } while (ctx.measureText(place).width > 820 && size > 30);
+  ctx.fillText(place, 540, 270);
+
+  ctx.beginPath(); ctx.arc(540, 520, 170, 0, Math.PI * 2);
+  ctx.fillStyle = level.color; ctx.fill();
+  ctx.lineWidth = 6; ctx.strokeStyle = 'rgba(0,0,0,0.12)'; ctx.stroke();
+  ctx.fillStyle = level.text;
+  ctx.font = '700 150px Fraunces, Georgia, serif';
+  ctx.fillText(Math.round(aqi), 540, 560);
+  ctx.font = '600 30px Inter, Arial, sans-serif';
+  ctx.fillText('AQI · PM2.5', 540, 610);
+
+  ctx.fillStyle = '#0f2f5f';
+  size = 56;
+  do { ctx.font = `700 ${size}px Inter, Arial, sans-serif`; size -= 2; } while (ctx.measureText(level.name).width > 840);
+  ctx.fillText(level.name, 540, 780);
+  ctx.fillStyle = '#5b6776';
+  ctx.font = '500 36px Inter, Arial, sans-serif';
+  ctx.fillText('PM2.5: ' + pm.toFixed(1) + ' µg/m³', 540, 840);
+
+  ctx.fillStyle = '#1e5aa8';
+  ctx.font = '700 38px Inter, Arial, sans-serif';
+  ctx.fillText('Check yours at amforpm.org', 540, 935);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 34px Fraunces, Georgia, serif';
+  ctx.fillText('AM for PM · Clean Air Initiative', 540, 1050);
+
+  c.toBlob(blob => {
+    if (!blob) { statusNode.textContent = 'Sorry, your browser could not make the image.'; return; }
+    const file = new File([blob], 'my-air-amforpm.png', { type: 'image/png' });
+    const text = `The air in ${label} today: ${level.name} (AQI ${Math.round(aqi)}). Check yours at https://amforpm.org/#air`;
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: 'My air today', text }).catch(() => {});
+    } else {
+      const a = el('a', { href: URL.createObjectURL(blob), download: 'my-air-amforpm.png' });
+      document.body.append(a); a.click(); a.remove();
+      statusNode.textContent = 'Image downloaded. Post it and tag AM for PM!';
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => {
+        statusNode.textContent = 'Image downloaded and caption copied. Post it and tag AM for PM!';
+      }).catch(() => {});
+    }
+  }, 'image/png');
+}
+
+/* ---------- city search, location, quick cities ---------- */
+function searchCity() {
+  const q = $('aq-city').value.trim();
+  if (!q) { aqMessage('Please type a city name.'); return; }
+  aqMessage('Finding ' + q + '...');
+  geocode(q).then(showAir).catch(err =>
+    aqMessage(err.message === 'notfound' ? 'City not found. Try another spelling, without the state.' : 'Could not search for that city. Please try again.'));
+}
+$('aq-go').addEventListener('click', searchCity);
+$('aq-city').addEventListener('keydown', e => { if (e.key === 'Enter') searchCity(); });
+document.querySelectorAll('[data-city]').forEach(b => b.addEventListener('click', () => {
+  $('aq-city').value = b.dataset.city; searchCity();
+}));
+$('aq-loc').addEventListener('click', () => {
+  if (!navigator.geolocation) { aqMessage('Location is not available in this browser. Type a city instead.'); return; }
+  aqMessage('Getting your location...');
+  navigator.geolocation.getCurrentPosition(
+    pos => showAir({ lat: pos.coords.latitude.toFixed(3), lon: pos.coords.longitude.toFixed(3), label: 'Your location' }),
+    () => aqMessage('Location permission was declined. Type a city instead.')
+  );
+});
+
+/* =========================================================
+   EXPOSURE CALCULATOR
+   ========================================================= */
+function num(id) { const v = parseFloat($(id).value); return isNaN(v) || v < 0 ? 0 : v; }
+
+function runCalc() {
+  const result = $('calc-result');
+  const pm = num('calc-pm'), hOut = num('calc-out'), hCar = num('calc-car'), hIn = num('calc-in'), hSleep = num('calc-sleep');
+  const actRate = parseFloat($('calc-act').value), src = parseFloat($('calc-src').value);
+  const total = hOut + hCar + hIn + hSleep;
+  if (total > 24) { result.replaceChildren(el('p', { text: `Your hours add up to ${total}. Please make them add up to 24 or less.` })); return; }
+  if (total === 0) { result.replaceChildren(el('p', { text: 'Enter how many hours you spent in each place.' })); return; }
+
+  const INDOOR = 0.6, R_REST = 0.5, R_SLEEP = 0.3, WHO = 5;
+  const parts = [
+    { name: 'Outdoors', dose: pm * actRate * hOut, clean: WHO * actRate * hOut },
+    { name: 'Car or bus', dose: pm * R_REST * hCar, clean: WHO * R_REST * hCar },
+    { name: 'Indoors', dose: (pm * INDOOR + src) * R_REST * hIn, clean: WHO * INDOOR * R_REST * hIn },
+    { name: 'Asleep', dose: pm * INDOOR * R_SLEEP * hSleep, clean: WHO * INDOOR * R_SLEEP * hSleep }
+  ];
+  const dose = parts.reduce((s, p) => s + p.dose, 0);
+  const clean = parts.reduce((s, p) => s + p.clean, 0);
+  const ratio = clean > 0 ? dose / clean : 0;
+  const top = parts.slice().sort((a, b) => b.dose - a.dose)[0];
+  const maxDose = Math.max(...parts.map(p => p.dose), 1);
+
+  const rows = parts.map(p => el('div', { className: 'bar-row' }, [
+    el('span', { text: p.name }),
+    el('div', { className: 'bar-track' }, [el('div', { className: 'bar-fill', style: `width:${(p.dose / maxDose * 100).toFixed(1)}%` })]),
+    el('span', { text: Math.round(p.dose) + ' µg' })
+  ]));
+
+  let verdict;
+  if (ratio <= 1.05) verdict = "That's at or below a day at the WHO guideline level. Nice clean air!";
+  else verdict = `That's about ${ratio.toFixed(1)}× what you'd breathe in the same day at the WHO guideline level of 5 µg/m³.`;
+
+  const tips = {
+    'Outdoors': 'Most of your dose came from time outside. On higher-AQI days, move hard exercise indoors or to a cleaner time of day.',
+    'Car or bus': 'Your commute was a big part. Keep car windows up and set the vent to recirculate on busy roads.',
+    'Indoors': src > 0 ? 'Indoor sources added a lot. Use a range hood when cooking and cut back on candles and incense.'
+                       : 'Most of your dose came from indoors. A HEPA air purifier in the rooms you use most can help.',
+    'Asleep': 'A lot came while you slept. A HEPA air purifier in your bedroom is one of the most effective steps.'
+  };
+
+  result.replaceChildren(
+    el('div', { className: 'small-print', text: 'Your estimated PM2.5 dose today' }),
+    el('div', { className: 'calc-big', text: Math.round(dose) + ' µg' }),
+    el('p', { text: verdict, style: 'margin-top:0.5rem' }),
+    ...rows,
+    el('p', { text: tips[top.name], style: 'margin-top:1rem' })
+  );
+}
+$('calc-go').addEventListener('click', runCalc);
+
+/* =========================================================
+   CLASSROOM AQI DISPLAY
+   ========================================================= */
+let crTimer = null, crClock = null;
+
+function openClassroom(place) {
+  place = place || store('amforpm-classroom');
+  if (!place) {
+    setStatus($('cr-launch-status'), 'Type your school\'s city and press "Launch display" to start.', 'err');
+    scrollToId('classroom-launch');
+    $('cr-city-input').focus({ preventScroll: true });
+    return;
+  }
+  const box = $('classroom');
+  box.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  $('cr-place').textContent = place.label;
+  const tick = () => { $('cr-clock').textContent = new Date().toLocaleString('en-US', { weekday: 'long', hour: 'numeric', minute: '2-digit' }); };
+  tick();
+  clearInterval(crClock); crClock = setInterval(tick, 20000);
+  const refresh = () => fetchAir(place.lat, place.lon).then(d => {
+    const lv = levelFor(d.aqi);
+    box.style.background = lv.color;
+    box.classList.toggle('light-text', lv.text === '#fff');
+    box.classList.toggle('dark-text', lv.text !== '#fff');
+    $('cr-aqi').textContent = Math.round(d.aqi);
+    $('cr-cat').textContent = lv.name;
+    $('cr-recess').textContent = lv.recess;
+    $('cr-tip').textContent = lv.crTip;
+    $('cr-updated').textContent = 'Updated ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }).catch(() => { $('cr-updated').textContent = 'Could not update. Will try again soon.'; });
+  refresh();
+  clearInterval(crTimer); crTimer = setInterval(refresh, 30 * 60 * 1000);
+}
+
+function closeClassroom() {
+  $('classroom').classList.remove('open');
+  document.body.style.overflow = '';
+  clearInterval(crTimer); clearInterval(crClock);
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  if (location.hash === '#classroom') history.replaceState(null, '', '#air');
+}
+
+$('cr-launch').addEventListener('click', () => {
+  const q = $('cr-city-input').value.trim();
+  const status = $('cr-launch-status');
+  if (!q) { setStatus(status, "Please type your school's city.", 'err'); return; }
+  setStatus(status, 'Finding ' + q + '...');
+  geocode(q).then(place => {
+    store('amforpm-classroom', place);
+    setStatus(status, '');
+    history.replaceState(null, '', '#classroom');
+    openClassroom(place);
+  }).catch(() => setStatus(status, 'City not found. Try another spelling, without the state.', 'err'));
+});
+$('cr-city-input').addEventListener('keydown', e => { if (e.key === 'Enter') $('cr-launch').click(); });
+$('cr-close').addEventListener('click', closeClassroom);
+$('cr-full').addEventListener('click', () => {
+  const box = $('classroom');
+  if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  else if (box.requestFullscreen) box.requestFullscreen().catch(() => {});
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && $('classroom').classList.contains('open') && !document.fullscreenElement) closeClassroom();
+});
+(function () { const saved = store('amforpm-classroom'); if (saved) $('cr-city-input').value = saved.label; })();
+
+/* =========================================================
+   JOURNEY OF A PARTICLE
+   ========================================================= */
+const JOURNEY = [
+  { x: 240, y: 340, part: 'jp-car', title: 'It starts at a tailpipe',
+    text: 'A car engine burns fuel and pushes out exhaust. Inside that gray puff are billions of soot particles smaller than 2.5 micrometers: PM2.5.' },
+  { x: 400, y: 205, part: 'jp-air', title: 'Drifting in the air',
+    text: 'The particle is so light it floats instead of falling. Fine particles can stay in the air for days to weeks and travel hundreds of miles on the wind.' },
+  { x: 690, y: 104, part: 'jp-nose', title: 'Past the nose',
+    text: 'You breathe in about 20,000 times a day. Nose hairs and mucus trap big particles like pollen and dust, but PM2.5 slips right through.' },
+  { x: 608, y: 250, part: 'jp-lungs', title: 'Deep in the lungs',
+    text: 'It travels down the airways into the alveoli, tiny air sacs where oxygen enters your blood. There, it irritates the lungs and causes inflammation.' },
+  { x: 640, y: 200, part: 'jp-blood', title: 'Into the bloodstream',
+    text: 'The smallest particles, and the chemicals stuck to them, can cross from the air sacs into the blood and travel around the body.' },
+  { x: 640, y: 322, part: 'jp-heart', title: 'Heart and brain',
+    text: 'Inflammation reaches blood vessels, the heart and even the brain. That is why PM2.5 is linked to heart attacks, strokes and dementia, not just breathing problems.' }
+];
+let jStep = 0, jTimer = null;
+
+JOURNEY.forEach((s, i) => {
+  const dot = el('button', { 'aria-label': 'Step ' + (i + 1) });
+  dot.setAttribute('aria-label', 'Go to step ' + (i + 1));
+  dot.addEventListener('click', () => { stopJourney(); showStep(i); });
+  $('jp-dots').append(dot);
+});
+
+function showStep(i) {
+  jStep = (i + JOURNEY.length) % JOURNEY.length;
+  const s = JOURNEY[jStep];
+  $('particle').setAttribute('transform', `translate(${s.x} ${s.y})`);
+  $('particle').style.transform = `translate(${s.x}px, ${s.y}px)`;
+  document.querySelectorAll('#pm25 .body-part').forEach(p => p.classList.toggle('hl', p.id === s.part));
+  if (s.part === 'jp-heart') $('jp-brain').classList.add('hl');
+  $('jp-step').textContent = `Step ${jStep + 1} of ${JOURNEY.length}`;
+  $('jp-title').textContent = s.title;
+  $('jp-desc').textContent = s.text;
+  [...$('jp-dots').children].forEach((d, k) => d.classList.toggle('active', k === jStep));
+}
+function stopJourney() {
+  clearInterval(jTimer); jTimer = null;
+  $('jp-play').innerHTML = '<i class="fa-solid fa-play"></i> Play';
+}
+$('jp-prev').addEventListener('click', () => { stopJourney(); showStep(jStep - 1); });
+$('jp-next').addEventListener('click', () => { stopJourney(); showStep(jStep + 1); });
+$('jp-play').addEventListener('click', () => {
+  if (jTimer) { stopJourney(); return; }
+  if (jStep === JOURNEY.length - 1) showStep(0); else showStep(jStep + 1);
+  $('jp-play').innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+  jTimer = setInterval(() => {
+    if (jStep === JOURNEY.length - 1) { stopJourney(); return; }
+    showStep(jStep + 1);
+  }, 4500);
+});
+showStep(0);
+
+/* =========================================================
+   PM2.5 QUIZ
+   ========================================================= */
+const QUIZ = [
+  { q: 'What does the "2.5" in PM2.5 stand for?',
+    a: ['2.5 grams per day', 'Particles 2.5 micrometers wide or smaller', 'The 2.5 most common pollutants', 'A pollution level of 2.5 on the AQI'], c: 1,
+    e: 'PM2.5 means particulate matter 2.5 micrometers (µm) in diameter or smaller. One micrometer is a thousandth of a millimeter.' },
+  { q: 'About how many PM2.5 particles could line up across the width of one human hair?',
+    a: ['About 3', 'About 30', 'About 3,000', 'About 3 million'], c: 1,
+    e: 'A human hair is roughly 50 to 70 µm wide, so about 20 to 30 particles of 2.5 µm fit across it.' },
+  { q: 'Why is PM2.5 more dangerous than bigger particles like pollen?',
+    a: ['It smells worse', 'It is heavier', 'It is small enough to get deep into the lungs and even the blood', 'It only appears at night'], c: 2,
+    e: 'Your nose and throat trap most large particles, but PM2.5 reaches the tiny air sacs of the lungs, and the smallest particles can enter the bloodstream.' },
+  { q: "What is the World Health Organization's guideline for yearly average PM2.5?",
+    a: ['5 µg/m³', '35 µg/m³', '100 µg/m³', '500 µg/m³'], c: 0,
+    e: 'In 2021 the WHO lowered its guideline to 5 µg/m³ for the yearly average, because harm was found even at low levels.' },
+  { q: 'On the Air Quality Index, what color means "Unhealthy for Sensitive Groups"?',
+    a: ['Green', 'Yellow', 'Orange', 'Purple'], c: 2,
+    e: 'Orange (AQI 101–150) means children, older adults and people with asthma or heart disease should limit long or intense outdoor activity.' },
+  { q: 'Which mask filters out most PM2.5 from wildfire smoke?',
+    a: ['A cloth mask', 'A bandana', 'A well-fitted N95 respirator', 'A scarf'], c: 2,
+    e: 'Cloth masks, bandanas and scarves let most fine particles through. A well-fitted N95 (or KN95) respirator filters most of them.' },
+  { q: 'Which of these is a common INDOOR source of PM2.5?',
+    a: ['Opening the fridge', 'Frying food on a gas stove', 'Watching TV', 'Drinking water'], c: 1,
+    e: 'Frying and searing food, gas stoves, candles, incense and fireplaces can push indoor PM2.5 higher than outdoors. Range hoods help.' },
+  { q: 'Some PM2.5 is "secondary." What does that mean?',
+    a: ['It is less harmful', 'It forms in the air when gases like sulfur dioxide and nitrogen oxides react', 'It comes from a second-hand store', 'It only exists indoors'], c: 1,
+    e: 'Secondary particles are not released directly. They form when gases from power plants, vehicles and farms react in the atmosphere.' },
+  { q: 'Which part of the body, besides the lungs, is strongly affected by PM2.5?',
+    a: ['The heart and blood vessels', 'Fingernails', 'Hair', 'Teeth'], c: 0,
+    e: 'PM2.5 is linked to heart attacks, strokes and irregular heartbeat. Heart disease is the largest single cause of PM2.5-related deaths.' },
+  { q: 'About how many deaths worldwide were linked to air pollution in 2023?',
+    a: ['7,900', '79,000', '790,000', '7.9 million'], c: 3,
+    e: 'The State of Global Air 2025 report linked 7.9 million deaths in 2023 to air pollution, about 1 in 8 deaths worldwide.' }
+];
+let qi = 0, qScore = 0;
+
+function renderQuestion() {
+  const box = $('quiz-box');
+  const item = QUIZ[qi];
+  const explain = el('div', { className: 'quiz-explain', hidden: true });
+  const next = el('button', { className: 'buy-btn', text: qi === QUIZ.length - 1 ? 'See my score' : 'Next question →', hidden: true });
+  next.addEventListener('click', () => { qi++; qi < QUIZ.length ? renderQuestion() : renderScore(); });
+
+  const opts = el('div', { className: 'quiz-options' });
+  item.a.forEach((text, i) => {
+    const b = el('button', { text });
+    b.addEventListener('click', () => {
+      [...opts.children].forEach((o, k) => {
+        o.disabled = true;
+        if (k === item.c) o.classList.add('correct');
+      });
+      const right = i === item.c;
+      if (right) qScore++; else b.classList.add('wrong');
+      explain.replaceChildren(el('strong', { text: right ? 'Correct! ' : 'Not quite. ' }), item.e);
+      explain.hidden = false; next.hidden = false;
+      next.focus({ preventScroll: true });
+    });
+    opts.append(b);
+  });
+
+  box.replaceChildren(
+    el('div', { className: 'quiz-meta' }, [el('span', { text: `Question ${qi + 1} of ${QUIZ.length}` }), el('span', { text: `Score: ${qScore}` })]),
+    el('div', { className: 'quiz-progress' }, [el('span', { style: `width:${(qi / QUIZ.length) * 100}%` })]),
+    el('div', { className: 'quiz-q', text: item.q }),
+    opts, explain,
+    el('div', { className: 'btn-row' }, [next])
+  );
+}
+
+function renderScore() {
+  const pct = qScore / QUIZ.length;
+  const msg = pct === 1 ? 'Perfect score! You are a true Clean Air Expert.'
+    : pct >= 0.7 ? 'Great job! You know a lot about the air you breathe.'
+    : pct >= 0.4 ? 'Good start! Read our PM2.5 Guide and try again.'
+    : 'Keep learning! Our PM2.5 Guide has all the answers.';
+  const retry = el('button', { className: 'buy-btn', text: 'Try again' });
+  retry.addEventListener('click', () => { qi = 0; qScore = 0; renderQuestion(); });
+  const share = el('button', { className: 'buy-btn amber' });
+  share.innerHTML = '<i class="fa-solid fa-share-nodes"></i> Challenge a friend';
+  const status = el('span', { className: 'share-status' });
+  share.addEventListener('click', () => {
+    const text = `I scored ${qScore}/${QUIZ.length} on the AM for PM air pollution quiz! Can you beat me? https://amforpm.org/#quiz`;
+    if (navigator.share) navigator.share({ title: 'PM2.5 Quiz', text }).catch(() => {});
+    else if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => { status.textContent = 'Copied! Paste it to a friend.'; });
+  });
+  const guide = el('button', { className: 'buy-btn ghost', text: 'Read the PM2.5 Guide' });
+  guide.addEventListener('click', () => goTo('pm25'));
+  $('quiz-box').replaceChildren(
+    el('div', { style: 'text-align:center' }, [
+      el('div', { className: 'small-print', text: 'Your score' }),
+      el('div', { className: 'score-big', text: `${qScore}/${QUIZ.length}` }),
+      el('p', { text: msg, style: 'font-size:1.15rem;margin-top:0.75rem' }),
+      el('div', { className: 'btn-row', style: 'justify-content:center' }, [retry, share, guide, status])
+    ])
+  );
+}
+renderQuestion();
+
+/* =========================================================
+   KIDS' CORNER: sorting game + coloring page
+   ========================================================= */
+const SORT = [
+  { t: 'Walking or biking to school', clean: true, why: 'No engine, no exhaust, and great exercise!' },
+  { t: 'Leaving the car running while waiting', clean: false, why: 'Idling engines puff out exhaust right where kids are standing.' },
+  { t: 'Burning leaves in the backyard', clean: false, why: 'Smoke from burning leaves is full of PM2.5.' },
+  { t: 'Turning off the car at school pickup', clean: true, why: 'Engine off means no exhaust near your school.' },
+  { t: 'Turning on the fan above the stove while cooking', clean: true, why: 'The range hood pulls cooking smoke out of your home.' },
+  { t: 'Lighting lots of candles indoors', clean: false, why: 'Candles release tiny soot particles into the room.' },
+  { t: 'Carpooling with friends', clean: true, why: 'Fewer cars on the road means less exhaust.' },
+  { t: 'Playing hard outside on a red AQI day', clean: false, why: "It doesn't make the air dirty, but it's not safe! On red days, play inside." }
+];
+let sortRight = 0, sortDone = 0;
+function renderSort() {
+  sortRight = 0; sortDone = 0;
+  $('sort-score').textContent = '';
+  $('sort-list').replaceChildren(...SORT.map(item => {
+    const why = el('div', { className: 'why' });
+    const row = el('div', { className: 'sort-item' });
+    const answer = choseClean => {
+      const ok = choseClean === item.clean;
+      row.classList.add(ok ? 'right' : 'oops');
+      [...btns.children].forEach(b => { b.disabled = true; });
+      why.textContent = (ok ? 'Yes! ' : 'Oops! ') + item.why;
+      sortDone++; if (ok) sortRight++;
+      $('sort-score').textContent = sortDone === SORT.length
+        ? `You got ${sortRight} out of ${SORT.length}! ${sortRight === SORT.length ? 'You are a Clean Air Hero!' : 'Great try!'}`
+        : `Score: ${sortRight} / ${sortDone}`;
+    };
+    const cleanBtn = el('button', { className: 'clean' }); cleanBtn.innerHTML = '<i class="fa-solid fa-leaf"></i> Clean air';
+    const dirtyBtn = el('button', { className: 'dirty' }); dirtyBtn.innerHTML = '<i class="fa-solid fa-smog"></i> Dirty air';
+    cleanBtn.addEventListener('click', () => answer(true));
+    dirtyBtn.addEventListener('click', () => answer(false));
+    const btns = el('div', { className: 'sort-btns' }, [cleanBtn, dirtyBtn]);
+    row.append(el('span', { text: item.t }), btns, why);
+    return row;
+  }));
+}
+$('sort-reset').addEventListener('click', renderSort);
+renderSort();
+
+function printColoring() {
+  const w = window.open('', '_blank');
+  if (!w) { alert('Please allow pop-ups to print the coloring page.'); return; }
+  w.document.write(`<!DOCTYPE html><html><head><title>Breezy Coloring Page - AM for PM<\/title>
+  <style>body{font-family:Arial,sans-serif;text-align:center;margin:0;padding:30px}h1{font-size:40px;margin:10px 0}
+  p{font-size:20px}svg{width:100%;max-width:640px}.line{border-bottom:2px solid #000;display:inline-block;width:300px}<\/style><\/head><body>
+  <h1>Breezy the Clean Air Cloud<\/h1>
+  <p>Color me in! Then draw something that keeps the air clean.<\/p>
+  <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000" stroke-width="4">
+    <circle cx="150" cy="50" r="28"/>
+    <g stroke-width="3"><line x1="150" y1="5" x2="150" y2="15"/><line x1="105" y1="50" x2="115" y2="50"/><line x1="185" y1="50" x2="195" y2="50"/><line x1="120" y1="20" x2="127" y2="27"/><line x1="180" y1="20" x2="173" y2="27"/><\/g>
+    <path d="M90 230 a55 55 0 0 1 30 -100 a75 75 0 0 1 140 -10 a55 55 0 0 1 50 110 z" fill="#fff"/>
+    <circle cx="170" cy="170" r="10"/><circle cx="230" cy="170" r="10"/>
+    <path d="M170 200 q30 25 60 0"/>
+    <circle cx="145" cy="195" r="10"/><circle cx="255" cy="195" r="10"/>
+    <path d="M30 380 h340"/>
+    <path d="M60 380 v-60 h50 v60"/><path d="M50 322 l35 -30 l35 30"/><rect x="78" y="345" width="14" height="35"/>
+    <path d="M300 380 v-50"/><circle cx="300" cy="300" r="35"/>
+    <path d="M200 380 v-40 m-15 15 l15 -15 l15 15"/>
+    <circle cx="350" cy="250" r="6"/><circle cx="40" cy="260" r="6"/><circle cx="70" cy="100" r="5"/>
+  <\/svg>
+  <p>My name: <span class="line"><\/span><\/p>
+  <p><strong>I'm a Clean Air Hero!<\/strong> amforpm.org<\/p>
+  <script>window.onload=function(){window.print();}<\/script><\/body><\/html>`);
+  w.document.close();
+}
+$('print-coloring').addEventListener('click', printColoring);
+$('print-coloring-2').addEventListener('click', printColoring);
+
+/* =========================================================
+   AMBASSADOR CHAPTER MAP (Leaflet + OpenStreetMap, free)
+   ========================================================= */
+let chapterMap = null, leafletLoading = false;
+function initMap() {
+  const n = CONFIG.chapters.length;
+  $('chapter-count').textContent = n ? `(${n} ${n === 1 ? 'chapter' : 'chapters'})` : '';
+  $('map-note').hidden = n > 0;
+  if (chapterMap) { setTimeout(() => chapterMap.invalidateSize(), 60); return; }
+  if (leafletLoading) return;
+  leafletLoading = true;
+
+  const css = el('link', { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' });
+  document.head.append(css);
+  const js = el('script', { src: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js' });
+  js.onload = () => {
+    chapterMap = L.map('chapter-map', { scrollWheelZoom: false }).setView([39.5, -96], window.innerWidth < 700 ? 3 : 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(chapterMap);
+    CONFIG.chapters.forEach(ch => {
+      const pop = el('div', {}, [
+        el('strong', { text: ch.school }), el('br'),
+        document.createTextNode(ch.city || ''),
+        ch.since ? el('div', { text: 'Chapter since ' + ch.since, style: 'color:#5b6776;font-size:12px' }) : ''
+      ]);
+      L.circleMarker([ch.lat, ch.lng], { radius: 9, color: '#1B5E20', weight: 2, fillColor: '#FFB300', fillOpacity: 0.95 })
+        .addTo(chapterMap).bindPopup(pop);
+    });
+    if (CONFIG.chapters.length > 1) {
+      chapterMap.fitBounds(CONFIG.chapters.map(c => [c.lat, c.lng]), { padding: [40, 40], maxZoom: 8 });
+    }
+    setTimeout(() => chapterMap.invalidateSize(), 60);
+  };
+  js.onerror = () => { $('map-note').hidden = false; $('map-note').textContent = 'The map could not load right now.'; };
+  document.body.append(js);
+}
+
+/* =========================================================
+   LIVE POLLUTION NEWS (TheNewsAPI)
+   ========================================================= */
+let newsLoaded = false;
+const FALLBACK_IMG = 'https://images.unsplash.com/photo-1473773508845-188df298d2d1?q=80&w=1200&auto=format&fit=crop';
+
+function newsMessage(text) {
+  $('news-container').replaceChildren(el('div', { className: 'card' }, [el('h3', { text })]));
+}
+
+function loadNews(force) {
+  if (newsLoaded && !force) return;   // only load once per visit (saves your API quota)
+  newsLoaded = true;
+  fetch('https://api.thenewsapi.com/v1/news/all?api_token=' + CONFIG.newsApiKey +
+        '&search=' + encodeURIComponent('"air pollution" | "air quality" | PM2.5') +
+        '&language=en&sort=published_at&limit=3')
+    .then(r => r.json())
+    .then(data => {
+      if (!data.data || data.data.length === 0) { newsMessage('No pollution news found today. Check back soon!'); return; }
+      $('news-container').replaceChildren(...data.data.map(article => {
+        const img = el('img', { className: 'news-image', alt: '', loading: 'lazy', src: article.image_url || FALLBACK_IMG });
+        img.onerror = () => { img.onerror = null; img.src = FALLBACK_IMG; };
+        const card = el('div', { className: 'card' }, [
+          img,
+          el('h3', { text: article.title || 'Untitled' }),
+          el('div', { className: 'news-date', text: article.published_at ? new Date(article.published_at).toLocaleDateString() : '' }),
+          el('p', { className: 'news-source', text: article.source || '' }),
+          el('p', { text: article.description || '' })
+        ]);
+        if (article.url && /^https?:\/\//.test(article.url)) {
+          card.append(el('a', { className: 'news-link', href: article.url, target: '_blank', rel: 'noopener', text: 'Read Full Article →' }));
+        }
+        return card;
+      }));
+    })
+    .catch(err => { console.error(err); newsLoaded = false; newsMessage("Unable to load today's news."); });
+}
+
+/* =========================================================
+   BACK TO TOP + START
+   ========================================================= */
+const toTop = $('to-top');
+window.addEventListener('scroll', () => toTop.classList.toggle('show', window.scrollY > 700), { passive: true });
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+openTab(location.hash.slice(1) || 'home', false);
 </script>
 
 </body>
